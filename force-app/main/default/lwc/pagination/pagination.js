@@ -3,7 +3,7 @@ import { LightningElement,api } from 'lwc';
 export default class Pagination extends LightningElement {
     currentPage =1;
     totalRecords;
-    @api recordSize = 6;
+    @api recordSize = 8;
     totalPage = 0;
 
     get records(){
@@ -49,7 +49,7 @@ export default class Pagination extends LightningElement {
             detail:{
                 records:this.visibleRecords
             }
-            
+
         }))
     }
 }
