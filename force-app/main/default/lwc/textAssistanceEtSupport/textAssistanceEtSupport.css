@@ -1,0 +1,13 @@
+.titre{
+    text-align: center;
+    font-family: Baskerville;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #B74803, #CC6D3D);
+    font-size: 40px;
+    background-image: linear-gradient(to right,  #B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}

@@ -1,0 +1,19 @@
+.copy {
+    margin-top: 0.5rem; 
+    margin-bottom: 0.5rem; 
+    display: flex; 
+    height: 100%;
+    flex-wrap: wrap; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 0.75rem; 
+    color: #6b7280; 
+    font-family: Baskerville;
+}
+
+.pageF{
+    background-image: linear-gradient(90deg, #022E51, #B74803, #CC6D3D, #A3B4C8, #A3B4C8, #CC6D3D, #B74803, #022e51);
+    width: 100%;
+    height: .5rem;
+    
+}

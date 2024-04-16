@@ -1,0 +1,100 @@
+.background{
+    padding-bottom: 3rem;
+    padding-left: 0;
+    padding-right: 0;
+    min-height: 75vh;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.logoNav{
+    text-align: left;
+    margin-left: 3rem;
+}
+
+.logo{
+    height: 2.5rem;
+}
+
+.corps {
+    max-width: 32.5rem;
+    margin: auto;
+    top: 50%;
+    transform: translateY(35%);
+    position: relative;
+}
+
+.corps1 {    
+    filter: blur(30px);
+    padding: 1rem;
+    inset: 0;
+    background-image: linear-gradient(90deg, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8 );
+    height: 40vh;
+    position: absolute;
+}
+
+.corps2 {
+    text-align: center;
+    padding: 2rem;
+    background-color: #022E51;
+    border-radius: 1rem;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.titre{
+    margin-bottom: 0.25rem;
+    background: linear-gradient(to right, #A3B4C8, #A3B4C8);
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    background-image: linear-gradient(to right, #A3B4C8, #A3B4C8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: Baskerville;
+    font-style: italic;
+    background-clip: text;
+    color: transparent;
+    font-style: normal;
+    width: fit-content;
+    font-weight : 700;
+}
+
+.message{
+    line-height: 1.5;
+    white-space: pre-wrap;
+    font-family: Roboto;
+    color: #fff;
+    font-size: 15px;
+
+}
+
+/* Media Query for Mobile */
+@media only screen and (max-width: 767px) {
+    .background{
+        max-height: 70vh;
+    }
+
+    .corps {
+        max-width: 90%; /* Adjusted width for mobile */
+        transform: translateY(0); /* Reset transform for mobile */
+        margin-top: 20px; /* Added top margin for mobile */
+    }
+
+    .logoNav {
+        text-align: center; /* Centering logo for mobile */
+        margin-left: 0; /* Remove left margin for mobile */
+    }
+
+    .titre {
+        font-size: 1.5rem; /* Adjusted font size for mobile */
+        line-height: 2rem; /* Adjusted line height for mobile */
+    }
+
+    .message{
+        font-size: 0.8rem;
+    }
+}

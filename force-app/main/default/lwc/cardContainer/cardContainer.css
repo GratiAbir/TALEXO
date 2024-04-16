@@ -1,0 +1,27 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin-bottom: 1rem; /* Espacement entre les lignes */
+    width: 30%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+/* For tablet */
+@media screen and (max-width: 992px) {
+    .card {
+        width: 48%; /* 2 cards per row */
+    }
+}
+
+/* For mobile */
+@media screen and (max-width: 600px) {
+    .card {
+        width: 100%; /* 1 card per row */
+    }
+}

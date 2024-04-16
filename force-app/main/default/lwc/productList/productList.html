@@ -1,0 +1,17 @@
+<template>
+    <section>
+        <div class="container">
+            <template for:each={products} for:item="product">
+                <div key={product.Id} class="content">
+                    <div class="image">
+                        <img src={product.Product_Image__c} alt={product.Name} />
+                    </div>
+                    <div class="text-box">
+                        <h3>{product.Product_Slogan__c}</h3>
+                        <p>{product.Description}</p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </section>
+</template>

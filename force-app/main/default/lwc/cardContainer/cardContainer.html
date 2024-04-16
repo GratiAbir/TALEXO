@@ -1,0 +1,9 @@
+<template>
+    <div class="card-container">
+        <template for:each={cards} for:item="card" for:index="index">
+            <div key={card.id} class="card">
+                <c-card image-src={card.imageSrc} card-text={card.cardText} soustext={card.soustext}></c-card>
+            </div>
+        </template>
+    </div>
+</template>

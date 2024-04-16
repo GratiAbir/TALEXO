@@ -1,0 +1,98 @@
+.flip-card {
+    border: 1px solid rgba(163, 180, 200, 0.3);
+    border-radius: 0.5rem; /* Arrondir les coins du card */
+    background-color: transparent;
+    width: 350px; /* Largeur de la carte */
+    height: 200px; /* Hauteur de la carte */
+    perspective: 1000px; /* Retirer si vous ne voulez pas l'effet 3D */
+    margin: 2px; /* Espacement autour de la carte */
+}
+
+/* For tablet */
+@media screen and (max-width: 992px) {
+    .flip-card {
+        width: 300px; /* 2 cards per row */
+    }
+}
+
+/* For mobile */
+@media screen and (max-width: 600px) {
+    .flip-card {
+        width: 100%; /* 1 card per row */
+    }
+}
+
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+
+    /*ajouter!!*/
+    
+    justify-content: center; /* Centrage horizontal */
+    align-items: center; /* Centrage vertical */
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    background-color: rgba(163, 180, 200, 0.3);
+    border-radius: 0.5rem;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background-color: #022E51;
+    border-radius: 0.5rem;
+    color: white;
+    transform: rotateY(180deg);
+    text-align: center;
+    display: flex; /* Ajout de display:flex */
+    flex-direction: column; /* Alignement vertical des éléments enfants */
+    justify-content: center; /* Centrage vertical */
+    align-items: center; /* Centrage horizontal */
+    padding: 30px;
+    font-family: Roboto;
+    font-size: 14px;
+}
+
+/* Style pour le texte en dessous de l'image */
+.image-text {
+    position: absolute; /* Position absolue par rapport au conteneur parent */
+    bottom: 0; /* Alignement du bas */
+    left: 0; /* Alignement à gauche */
+    width: 100%; /* Largeur de l'image */
+    color: #022E51; /* Couleur du texte */
+    padding: 8px; /* Espacement intérieur */
+    box-sizing: border-box; /* Pour inclure le padding dans la largeur */
+    font-family: Baskerville;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Make the image fill the entire card */
+.flip-card img {
+    margin-top: 15px;
+    width: 40%;
+    height: 40%;
+    object-fit: cover;
+    border-radius: 0.5rem; /* Arrondir les coins de l'image */
+}

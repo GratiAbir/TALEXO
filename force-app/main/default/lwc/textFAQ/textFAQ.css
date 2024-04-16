@@ -1,0 +1,12 @@
+p{
+    font-family: Baskerville;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #B74803, #CC6D3D);
+    font-size: 60px;
+    background-image: linear-gradient(to right,  #B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: 2s anim-lineUp ease-out infinite;
+}

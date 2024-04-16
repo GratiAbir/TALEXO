@@ -1,0 +1,139 @@
+<template>
+    <div class="corps1">
+        <br/>
+        <div class="corps2">
+            <!-- Welcoming Section -->
+            <div class="section1">
+                <h2 class="welcome">Bienvenue chez TALEXO !</h2>
+                <div style="white-space: pre-wrap; font-size: 15px">
+                    <p>Vous envisagez d'offrir des chèques resto, cadeau, habillement ou des cartes multiservices à vos collaborateurs ? Vous êtes au bon endroit !</p>
+                    <br/>
+                    <p> <strong>Pour créer votre devis personnalisé et passer votre commande </strong>en quelques clics, partagez simplement quelques informations sur vous et votre entreprise. Nous nous occupons du reste !</p>
+                </div>
+            </div>
+            <!-- Form Section -->
+            <form class="section2"
+            action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DWU0000033Uvt"
+            method="POST"
+            >
+            <input type=hidden name="oid" value="00DWU0000033Uvt">
+            <input type=hidden name="retURL" value="https://talan104-dev-ed.develop.my.site.com/s/felicitations-page">
+            
+                <!-- Partie Vos Informations -->
+                <h2 class="nomSection">Vos informations</h2>
+                <div class="formulaire">             
+                    <div class="champ">
+                        <input class="entree" placeholder="Nom"  id="last_name" name="last_name" type="text" required></input>
+                        <span class="fin"></span>
+                    </div>
+                    <div class="champ">
+                        <input class="entree" placeholder="Prénom" id="first_name" name="first_name" type="text" required></input>
+                        <span class="fin"></span>
+                    </div>            
+                </div>
+                <div class="formulaire">
+                    <div class="champ">
+                        <input class="entree" placeholder="Adresse E-mail" id="email" name="email" type="text" required></input>
+                        <span class="fin"></span>
+                    </div>
+                    <div class="champ">
+                        <input class="entree" placeholder="Numéro de téléphone" id="phone" name="phone" type="text"></input>
+                        <span class="fin"></span>
+                    </div>
+                </div>    
+                <div class="formulaire">
+                    <div class="champ">
+                        <input class="entree" placeholder="Votre titre" id="title" name="title" type="text" required></input>
+                        <span class="fin"></span>
+                    </div>                      
+                </div>                
+
+                <!-- Partie Votre Entreprise -->
+                <div>                    
+                    <h2 class="nomSection">Votre entreprise</h2>
+                    <div class="formulaire">     
+                        <div class="champ">                        
+                            <input class="entree" placeholder="Nom Entreprise"  id="company" name="company" type="text" required></input>
+                            <span class="fin"></span>
+                        </div>  
+                        <div class="champ">
+                            <select class="entree" id="industry" name="industry">
+                                <option value="" disabled selected hidden>Secteur d'activité</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Apparel">Vêtements</option>
+                                <option value="Banking">Banque</option>
+                                <option value="Biotechnology">Biotechnologie</option>
+                                <option value="Chemicals">Produits Chimiques</option>
+                                <option value="Communications">Communications</option>
+                                <option value="Construction">Construction</option>
+                                <option value="Consulting">Conseil</option>
+                                <option value="Education">Éducation</option>
+                                <option value="Electronics">Électronique</option>
+                                <option value="Energy">Energie</option>
+                                <option value="Engineering">Ingénierie</option>
+                                <option value="Entertainment">Divertissement</option>
+                                <option value="Environmental">Environnement</option>
+                                <option value="Finance">Finances</option>
+                                <option value="Food &amp; Beverage">Alimentation &amp; Boissons</option>
+                                <option value="Government">Gouvernement</option>
+                                <option value="Healthcare">Soins de santé</option>
+                                <option value="Hospitality">Hospitalité</option>
+                                <option value="Insurance">Assurance</option>
+                                <option value="Machinery">Machines</option>
+                                <option value="Manufacturing">Fabrication</option>
+                                <option value="Media">Médias</option>
+                                <option value="Not For Profit">Sans but lucratif</option>
+                                <option value="Recreation">Loisirs</option>
+                                <option value="Retail">Vente au Détail</option>
+                                <option value="Shipping">Expédition</option>
+                                <option value="Technology">Technologie</option>
+                                <option value="Telecommunications">Télécommunications</option>
+                                <option value="Transportation">Transport</option>
+                                <option value="Utilities">Utilitaires</option>
+                                <option value="Other">Autres</option>
+                            </select>
+                            <span class="fin"></span>
+                        </div>                         
+                    </div>
+    
+                    <div class="formulaire"> 
+                        <div class="champ">
+                            <input class="entree" placeholder="Nombre de salariés" id="employees" name="employees" type="text" value="" required></input>
+                            <span class="fin"></span>
+                        </div>     
+                        <div class="champ">                        
+                            <input class="entree" placeholder="Revenu annuel (DT)" id="revenue" name="revenue" type="text" required></input>
+                            <span class="fin"></span>
+                        </div>                     
+                    </div>
+
+                    <div class="formulaire">     
+                        <div class="champ">                        
+                            <input class="entree" placeholder="Pays" id="country" name="country" type="text" required></input>
+                            <span class="fin"></span>
+                        </div>  
+                        <div class="champ">
+                            <input class="entree" placeholder="Ville" id="city" name="city" type="text"></input>
+                            <span class="fin"></span>
+                        </div>   
+                        <div class="champ">                        
+                            <input class="entree" placeholder="Etat/Povince" id="state" name="state" type="text"></input>
+                            <span class="fin"></span>
+                        </div>  
+                        <div class="champ">
+                            <input class="entree" placeholder="Zip" id="zip" name="zip" type="text"></input>
+                            <span class="fin"></span>
+                        </div>                  
+                    </div>
+                    
+                    <div class="bas">
+                        <p class="paragraph">Pourquoi avons-nous besoin de ces informations ? <br/>
+                            Chez TALEXO, nous recueillons des détails sur vous et votre entreprise dans le but de vous fournir un devis personnalisé. 
+                            Cela nous permettra, le cas échéant, de faciliter votre processus de commande.</p>   
+                        <button class="bouton" type="submit" name="submit">Suivant</button>                            
+                    </div> 
+                </div>                                            
+            </form>
+        </div>
+    </div>
+</template>

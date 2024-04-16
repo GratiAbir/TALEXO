@@ -1,0 +1,25 @@
+.titre {
+    font-family: Baskerville;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(to right, #022E51, #A3B4C8);
+    font-size: 30px;
+    background-image: linear-gradient(to right, #022E51, #A3B4C8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contenu {
+    font-family: Roboto;
+    font-weight: 400;
+    color: black;
+    font-size: 14px;
+    margin-left: 20px; /* Ajouter une marge à gauche pour créer un retrait */
+}
+
+.contenu li {
+    
+    margin-bottom: 0.5rem; /* Ajouter un espacement entre les éléments de liste */
+    padding-left: 20px; /* Ajouter une tabulation avant chaque point */
+}

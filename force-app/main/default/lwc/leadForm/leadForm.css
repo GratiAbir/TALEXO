@@ -1,0 +1,210 @@
+.corps1{
+    display:flex;
+    /*background-color: #f7ece5 ;*/
+    margin-top: 2rem;
+    padding-left: 20rem;
+    padding-right: 20rem;
+    padding-top: 2rem;      
+    padding: 1rem;
+    height: 100%;
+    min-height: calc(100vh - 5.5rem);
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
+}
+
+.corps2 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 60rem;
+}
+
+.section1{
+    border-radius: 1rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    p > strong {
+        font-weight: 500;
+    }
+    p {
+        font-family: Roboto;
+        white-space: pre-wrap;
+        line-height: 1.25;
+        font-size: 12px;
+    }
+   
+}
+
+.welcome{
+    font-family: Baskerville;
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(to right, #B74803, #CC6D3D);
+    font-size: 2rem;
+    background-image: linear-gradient(to right, #B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section2{
+    border-radius: 1rem;
+    background-color: #ffffff;
+    padding: 2rem;
+}
+
+.nomSection{
+    font-family: Baskerville;
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(to right, #022E51, #A3B4C8);
+    font-size: 1.75rem; 
+    background: linear-gradient(to right, #022E51, #A3B4C8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.champ{
+    flex: 6;    
+}
+
+
+.entree,
+.entreeLongLabel{
+    font-family: Roboto;
+    background-color: #ecf0f4;
+    height: 3rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    outline: none;
+    opacity: 0.8;
+    font-size: 0.8rem;
+}
+
+.fin{
+    display: block;
+    height: 1rem; 
+}
+
+.bas {
+    margin-top: 0.5rem;
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    gap: 1.5rem; 
+}
+
+.paragraph {
+    font-size: 0.6rem; 
+    color: #6b7280; 
+    font-family: Roboto;
+}
+
+.bouton {
+    background-color: #022E51;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: Baskerville;
+    font-size: 15px;
+    font-weight: 500;
+    height: 48px;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 100%;
+    padding: 2px 24px;
+    position: relative;
+    text-align: center;    
+  }
+  
+  .bouton:hover {
+    background: #B74803;
+    color: #fff;
+  }
+  
+  .bouton:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+  }
+  
+  .bouton:focus {
+    outline: none;
+    border: 2px solid #B74803;
+  }
+
+/* Ajouter ces règles pour les écrans de petite taille (mobile) */
+@media (max-width: 767px) {
+    .section1,
+    .section2 {
+        padding: 1rem; /* Ajuster le padding pour le contenu sur les petits écrans */
+    }
+
+    .welcome{
+        font-size: 2rem;
+    }
+
+    .nomSection{
+        font-size: 1.1rem;
+    }
+
+    .entreeLongLabel {
+        white-space: normal;
+    }
+
+}
+
+
+ /* Définir les règles pour les écrans de taille moyenne, comme les tablettes */
+@media (min-width: 768px) {
+   
+
+    .corps1 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .bouton {
+        padding: 16px 36px;
+    }
+
+}
+
+/* Définir les règles pour les écrans de grande taille, comme les desktops */
+@media (min-width: 1024px) {
+    .corps1 {
+        padding-left: 20rem;
+        padding-right: 20rem;
+    }
+
+    .formulaire {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .formulaire > * + * {
+        margin-left: 1rem;
+    }
+
+    .bas {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .bas > button {
+        width: 8.5rem;
+    }
+
+    .bouton {
+        padding: 16px 48px;
+    }
+}
