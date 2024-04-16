@@ -5,6 +5,7 @@ import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 
+
 const columns = [
     { label: 'Name', fieldName: 'Name' },
     { label: 'Title', fieldName: 'Title' },
@@ -57,13 +58,14 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     @track error;
     columns = columns;
     visibleDatas;
-    searchKey = '';
-    
+    @track searchKey = '';
+
     @wire(getLead)
     wiredLeads(result) {
         this.wireResult = result;
         if (result.data) {
             this.data = result.data;
+            this.filterData(); // Call filter method after data is loaded
         } else if (result.error) {
             this.error = result.error;
         }
@@ -95,13 +97,13 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     handleDeleteRow(recordIdToDelete) {
         deleteRecord(recordIdToDelete)
             .then(result => {
-                this.showToast('Success!!', 'Record deleted successfully!!', 'success', 'dismissable');
+                this.showToast('Success', 'Record deleted successfully', 'success', 'dismissable');
                 return refreshApex(this.wireResult);
             }).catch(error => {
                 this.error = error;
             });
     }
-    
+
     showToast(title, message, variant, mode) {
         const evt = new ShowToastEvent({
             title: title,
@@ -117,17 +119,59 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         console.log(event.detail.records);
     }
 
+    handleSearchKeyChange(event) {
+        this.searchKey = event.target.value;
+        // Call a method to filter data based on the search key
+        this.filterData();
+    }
+    filterData() {
+        if (this.data) {
+            this.visibleDatas = this.data.filter(lead =>
+                lead.Name.toLowerCase().includes(this.searchKey.toLowerCase())
+            );
+        }
+    }
+
+    /* handleDownloadCSV() est une méthode appelée pour télécharger les données de la liste au format CSV. */
+    handleDownloadCSV() {
+        const csvData = this.data.map(lead => ({
+            'Lead Name': lead.Name,
+            'Phone': lead.Phone,
+            'Email': lead.Email
+        }));
+ 
+        exportCSV(this.columns, csvData, 'LeadList');
+    }
+
+    /* downloadCSV() est une méthode asynchrone utilisée pour générer et télécharger le fichier CSV. */
+    async downloadCSV() {
+        const data = this.data;
+        if (!data || data.length === 0) {
+            this.showToast('Error', 'No data to download', 'error');
+            return;
+        }
+    
+        const csvContent = this.convertArrayOfObjectsToCSV(data);
+        this.downloadCSVFile(csvContent, 'LeadsList.csv');
+    }
+    
+
+    /* convertArrayOfObjectsToCSV(data) convertit les données des prospects en une chaîne CSV. */
     convertArrayOfObjectsToCSV(data) {
         const csvHeader = Object.keys(data[0]).join(',');
         const csvRows = data.map(row => Object.values(row).join(','));
         return csvHeader + '\n' + csvRows.join('\n');
     }
- 
+
+    /* downloadCSVFile(csvContent, fileName) télécharge le fichier CSV généré en utilisant l'élément <a> caché. */
     downloadCSVFile(csvContent, fileName) {
         const hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
-        hiddenElement.target = '_blank';
-        hiddenElement.download = fileName;
+        hiddenElement.setAttribute('download', fileName); // Use setAttribute to set the download attribute
+        hiddenElement.style.display = 'none';
+        document.body.appendChild(hiddenElement);
         hiddenElement.click();
+        document.body.removeChild(hiddenElement);
     }
+
 }
