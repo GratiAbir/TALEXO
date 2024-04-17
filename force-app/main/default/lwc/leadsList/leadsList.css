@@ -27,7 +27,11 @@
 .slds-table td {
     text-align: left;
 }
- 
+
+lightning-button{
+    margin: 10px;
+}
+
 .slds-button-group {
     margin-top: 1rem;
 }

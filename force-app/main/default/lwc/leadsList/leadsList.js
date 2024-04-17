@@ -174,4 +174,15 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         document.body.removeChild(hiddenElement);
     }
 
+    /* Dashboard redirection */
+    handleClickDashboard(){
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: 'https://talan104-dev-ed.develop.lightning.force.com/lightning/r/Dashboard/01ZWU000000IQg52AG/view?queryScope=userFolders'
+            }
+        });
+ 
+    }
+
 }
