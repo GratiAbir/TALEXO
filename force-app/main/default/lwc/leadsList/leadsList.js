@@ -4,6 +4,9 @@ import { NavigationMixin } from 'lightning/navigation';
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
+import ACCOUNT_OBJECT from "@salesforce/schema/Account";
+import NAME_FIELD from "@salesforce/schema/Account.Name";
+import WEBSITE_FIELD from "@salesforce/schema/Account.Website";
 
 
 const columns = [
@@ -15,7 +18,7 @@ const columns = [
     { label: 'Lead Status', fieldName: 'Status' },
 
     {
-        type: "button", label: 'View', initialWidth: 100, typeAttributes: {
+        type: "button", label: 'Actions', initialWidth: 100, typeAttributes: {
             label: 'View',
             name: 'View',
             title: 'View',
@@ -27,7 +30,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: 'Edit', initialWidth: 100, typeAttributes: {
+        type: "button", label: '', initialWidth: 100, typeAttributes: {
             label: 'Edit',
             name: 'Edit',
             title: 'Edit',
@@ -39,7 +42,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: 'Delete', initialWidth: 110, typeAttributes: {
+        type: "button", label: '', initialWidth: 110, typeAttributes: {
             label: 'Delete',
             name: 'Delete',
             title: 'Delete',
@@ -58,6 +61,8 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     @track error;
     columns = columns;
     visibleDatas;
+    accountObject = ACCOUNT_OBJECT;
+    myFields = [NAME_FIELD, WEBSITE_FIELD];
     @track searchKey = '';
 
     @wire(getLead)
@@ -95,23 +100,18 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     }
 
     handleDeleteRow(recordIdToDelete) {
-        deleteRecord(recordIdToDelete)
-            .then(result => {
-                this.showToast('Success', 'Record deleted successfully', 'success', 'dismissable');
-                return refreshApex(this.wireResult);
-            }).catch(error => {
-                this.error = error;
-            });
-    }
+        // Afficher une boîte de dialogue de confirmation personnalisée
+        const confirmation = window.confirm('Are you sure you want to delete this lead?');
 
-    showToast(title, message, variant, mode) {
-        const evt = new ShowToastEvent({
-            title: title,
-            message: message,
-            variant: variant,
-            mode: mode
-        });
-        this.dispatchEvent(evt);
+        if (confirmation) {
+            deleteRecord(recordIdToDelete)
+                .then(result => {
+                    this.showToast('Success', 'Record deleted successfully', 'success', 'dismissable');
+                    return refreshApex(this.wireResult);
+                }).catch(error => {
+                    this.error = error;
+                });
+        }
     }
  
     updateContactHandler(event){
@@ -119,6 +119,19 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         console.log(event.detail.records);
     }
 
+    //New
+    handleCreateRecord() {
+        // Navigate to the record creation page for the desired object
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'Lead',
+                actionName: 'new'
+            }
+        });
+    }
+
+    //Search
     handleSearchKeyChange(event) {
         this.searchKey = event.target.value;
         // Call a method to filter data based on the search key
@@ -183,6 +196,16 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
             }
         });
  
+    }
+
+    showToast(title, message, variant, mode) {
+        const evt = new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: variant,
+            mode: mode
+        });
+        this.dispatchEvent(evt);
     }
 
 }

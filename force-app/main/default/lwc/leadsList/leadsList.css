@@ -2,7 +2,11 @@
     display: block;
     padding: 1rem;
 }
- 
+
+.slds-col{
+    margin-top: 30px;
+}
+
 .slds-card {
     padding: 1rem;
     margin-bottom: 1rem;

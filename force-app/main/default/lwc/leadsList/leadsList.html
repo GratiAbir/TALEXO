@@ -1,12 +1,17 @@
 <template>
-    <lightning-card title="Leads List" icon-name="standard:lead">
+    <lightning-card title="Leads List" icon-name="standard:lead" style="margin-bottom: 30px;">
         <div class="slds-m-around_medium">
             <div class="slds-grid slds-gutters">
                 <div class="slds-col"> 
-                    <!-- Download CSV Button --> 
-                    <lightning-button variant="brand" label="Download CSV" onclick={downloadCSV} title="Download action with brand variant" icon-name="utility:download" class="slds-m-left_x-small"></lightning-button> 
+                    <!--New Button-->
+                    <lightning-button label="New" onclick={handleCreateRecord} variant="brand-outline" class="slds-m-left_x-small"></lightning-button>
+
                     <!-- Dashboard Button --> 
-                    <lightning-button variant="brand-outline" label="Dashboard" title="Primary action with lighter look" onclick={handleClickDashboard} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand-outline" label="View Dashboard" title="Primary action with lighter look" onclick={handleClickDashboard} class="slds-m-left_x-small"></lightning-button>
+                    
+                    <!-- Download CSV Button --> 
+                    <lightning-button variant="brand" label="Download as CSV" onclick={downloadCSV} title="Download action with brand variant" icon-name="utility:download" class="slds-m-left_x-small"></lightning-button> 
+                    
                 </div>
                 
                 <div class="slds-col"></div>
