@@ -71,27 +71,6 @@ lightning-formatted-rich-text{
     text-align: center;
 }
 
-.section1{
-    padding: 2rem;
-    margin-bottom: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 10px;   
-}
-
-.welcome{
-    text-align: center;
-    font-family: Baskerville;
-    font-style: italic;
-    font-weight: 700;
-    background: linear-gradient(to right, #022E51, #022E51);
-    font-size: 2rem;
-    background-image: linear-gradient(to right, #022E51, #022E51);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
 .produits{
     align-items: stretch;
     margin-bottom: 1.5rem;

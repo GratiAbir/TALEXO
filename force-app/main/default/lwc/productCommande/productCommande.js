@@ -1,10 +1,16 @@
-import {LightningElement, api, wire} from "lwc";
+import {LightningElement, api, wire, track} from "lwc";
 // messageChannels
 import { publish, MessageContext } from "lightning/messageService";
 import CART_CHANNEL from "@salesforce/messageChannel/productAddRemoveCartChannel__c";
 import talexoResources from '@salesforce/resourceUrl/logo';
 
 export default class ProductCommande extends LightningElement {
+	@track showModal = false;
+
+	@api openModal(products) {
+        this.showModal = true;
+    }
+
 
     get appResources() {
         return {

@@ -1,0 +1,131 @@
+.titre{
+    text-align: center;
+    font-family: Baskerville;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(to right, #B74803, #CC6D3D);
+    font-size: 40px;
+    background-image: linear-gradient(to right,  #B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.custom-modal-width {
+    max-width: 600px; /* Modifiez cette valeur selon votre préférence */
+}
+
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.image{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    position: relative;
+    width: 427px;
+    height: auto;
+}
+
+.formulaire{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.input-group{
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-collapse: separate;
+    margin-bottom: 7px;
+}
+
+.nom{
+    padding-right: 20px;
+    text-align: right;
+    max-width: 50%;
+    margin-bottom: 0;
+    display: inline-block;
+}
+
+.counter{
+    border: 2px solid #221C46;
+    background-color: #fff;
+    font-family: TTTravels-Bold;
+    border-radius: 0;
+    box-shadow: none;
+    width: 190px;
+    background: #fff;
+    border-radius: 50px;
+    padding: 3px;
+    display: inline-flex;
+    width: 225px;
+    height: 42px;
+    box-shadow: 0 1px 1px 0 rgba(3, 3, 3, .35);
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.counter-decrease{
+    margin: 0 0 4px 8px;
+    background: transparent;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.counter-decrease span{
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 31px;
+    color: #00EB5E;
+}
+
+.counter-value{
+    font-size: 15px;
+    color: #221C46;
+    border: none;
+    width: 100%;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c2455;
+    text-align: center;
+}
+
+.counter-increase{
+    margin: 0 0 4px 8px;
+    background: transparent;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.counter-increase span{
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 31px;
+    color: #00EB5E;
+}

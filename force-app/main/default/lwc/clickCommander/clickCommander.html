@@ -1,0 +1,169 @@
+<template>
+    <template if:true={showModal}>
+        <section aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container custom-modal-width">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_small">Votre commande sur mesure</h2>
+					<lightning-icon class="slds-modal__close" icon-name="utility:close" size="small"
+						onclick={closeModal}></lightning-icon>
+				</header>
+                <div class="slds-modal__content modalBodySpinner">
+                    <div class="slds-p-around_small">
+                        <h3 class="titre">{productName}</h3>
+
+                        <!--Vouchers Form-->
+                        <template if:true={showVoucherForm}>
+                            <div class="row">
+                                <div class="image">
+                                    <lightning-formatted-rich-text value={productImage}></lightning-formatted-rich-text>
+                                </div>
+                                <div class="formulaire">
+                                    <div class="input-group">
+                                        <div class="nom">
+                                            <label for="voucherValue">Valeur de chèque (TND)</label>
+                                        </div>
+                                        <div class="counter">
+                                            <div class="counter-decrease">
+                                                <span>-</span>
+                                            </div>
+                                            <div class="counter-input">
+                                                <input class="counter-value" id="voucherValue" onchange={HandelvoucherValueChange} value={voucherValue} name="voucherValue" type="number" required></input>
+                                            </div>
+                                            <div class="counter-increase">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="nom">
+                                            <label for="NumberOfVouchersPerBooklet">Nombre de chèque par carnet :</label>
+                                        </div>
+                                        <div class="counter">
+                                            <div class="counter-decrease">
+                                                <span>-</span>
+                                            </div>
+                                            <div class="counter-input">
+                                                <input class="counter-value" placeholder="Voucher Value (TND)" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
+                                            </div>
+                                            <div class="counter-increase">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="nom">
+                                            <label for="Quantity">Quantité :</label>
+                                        </div>
+                                        <div class="counter">
+                                            <div class="counter-decrease">
+                                                <span>-</span>
+                                            </div>
+                                            <div class="counter-input">
+                                                <input class="counter-value" id="Quantity" onchange={HandelQuantityChange} value={Quantity} name="Quantity" type="number" required></input>
+                                            </div>
+                                            <div class="counter-increase">
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="voucherValue">Voucher Value (TND)</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Voucher Value (TND)" id="voucherValue" onchange={HandelvoucherValueChange} value={voucherValue} name="voucherValue" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>                      
+                            </div>  
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="NumberOfVouchersPerBooklet">Number of vouchers per booklet</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Number of vouchers per booklet" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>
+                            </div>    
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="Quantity">Quantity</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Quantity" id="Quantity" onchange={HandelQuantityChange} value={Quantity} name="Quantity" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>
+                            </div>    
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="NameontheVoucher">Name on the Voucher</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Name on the Voucher" id="NameontheVoucher" onchange={HandelNameontheVoucherChange} name="NameontheVoucher" type="text"></input>
+                                    <span class="fin"></span>
+                                </div>
+                            </div>
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label>Total Price</label>
+                                </div>    
+                                <div class="champ">
+                                    <h2>{returnTotalPrice} TND</h2>                    
+                                    <span class="fin"></span>
+                                </div>
+                            </div>
+                            -->
+                        </template>
+
+
+                        <!--Credit_Cards Form-->
+                        <template if:true={showCreditCardForm}>
+                            <div class="formulaire">
+                                <div class="champ">
+                                    <input class="entree" placeholder="Recharge Value (TND)" id="recharcheValue" name="recharcheValue" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>
+                            </div>   
+                            
+                            <div class="form-field">
+                                <button class="bouton" onclick={addInput}>add a new recipient</button>
+                                <template for:each={additionalInputs} for:item="input">
+                                    <div class="formulaire" key={input.key}>
+                                        <div class="champ">
+                                            <input class="entree" placeholder="Full Name"  id={input.key} name="fullName" type="text" required></input>
+                                            <span class="fin"></span>
+                                        </div>
+                                        <div class="champ">
+                                            <input class="entree" placeholder="CIN" id={input.key} name="cin" type="number" required></input>
+                                            <span class="fin"></span>
+                                        </div>                       
+                                    </div>  
+                                </template>
+                                
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+					<lightning-button label="Annuler" onclick={closeModal} class="slds-p-around_x-small">
+					</lightning-button>
+                    <lightning-button variant="brand" label="Ajouter au panier" class="slds-p-around_x-small" 
+                        if:false={isAddedToCart} type="submit" name="submit" onclick={handleAddToCart}></lightning-button>
+					<lightning-button variant="brand" label="Retirer de ma sélection" class="slds-p-around_x-small"
+                        if:true={isAddedToCart} type="submit" name="submit" onclick={handleRemoveFromCart}></lightning-button>
+				</footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

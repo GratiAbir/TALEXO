@@ -1,17 +1,10 @@
-<template>
+<template>    
     <section class="l-wrapper">
         <div class="row">
             <div id="content-wrapper" class="col-12">
                 <section id="main" class="page-wrapper--index">
                     <section id="content" class="page-home">
                         <section class="featured-products">
-
-                            <!-- Title Section -->
-                            <div class="section1">
-                                <h2 class="welcome">Découvrez nos produits et passez vos commandes en quelques clics !</h2>
-                            </div>
-
-                            <!--Produits-->
                             <div class="produits">
                                 <template for:each={products} for:item="product">
                                     <div class="produit" key={product.Id}>
@@ -23,7 +16,12 @@
                                                 <div class="description">
                                                     <h3 class="description-titre">{product.Name}</h3>
                                                     <p>{product.Summary__c}</p>
-                                                    <button class="btn" onclick={handleClick}>Commander &#8594;</button>
+                                                    <a href="javascript:void(0)" slot="actions" 
+                                                        data-productid={product.Id} 
+                                                        data-productname={product.Name} 
+                                                        data-productfamily={product.Family} 
+                                                        data-productimage={product.Product_Image__c}
+                                                        onclick={handleOpenCommande} class="btn">Commander &#8594;</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -36,4 +34,6 @@
             </div>
         </div>
     </section>
+    <c-click-commander></c-click-commander>
+    
 </template>

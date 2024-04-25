@@ -21,7 +21,7 @@ public with sharing class productController {
     public static List<Product2> getProductsBesoinsPage() { 
         try {
             List<Product2> lstProducts = [
-                    SELECT Id, Name, Summary__c, Icon__c 
+                    SELECT Id, Name, Summary__c, Icon__c, Product_Image__c, Family 
                     FROM Product2
                 ];
                   return lstProducts;

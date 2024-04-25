@@ -1,0 +1,11 @@
+.welcome{
+    text-align: center;
+    font-family: Baskerville;
+    font-weight: bold;
+    font-style: italic;
+    background: linear-gradient(to right, #022E51, #022E51);
+    font-size: 40px;
+    background-image: linear-gradient(to right, #022E51, #022E51);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
