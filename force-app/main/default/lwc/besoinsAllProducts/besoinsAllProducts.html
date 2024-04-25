@@ -13,83 +13,22 @@
 
                             <!--Produits-->
                             <div class="produits">
-                                <article class="produit" data-id-product="1">
-                                    <div class="card">
-                                        <div class="image">
-                                            <a href="page commande">
-                                                <img src="" alt="Carte Repas"/>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="description">
-                                                <h2 class="description-titre">Chèque Repas</h2>
-                                                <p>Le Chèque Repas de TALEXO se distingue par sa liberté de choix offerte grâce à son réseau étendu, en faisant un excellent outil social.</p>
-
-                                                <!-- bouton -->
-                                                <button class="button-17" onclick={handleClick}>Commander</button>
+                                <template for:each={products} for:item="product">
+                                    <div class="produit" key={product.Id}>
+                                        <div class="card">
+                                            <div class="image">
+                                                <lightning-formatted-rich-text value={product.Icon__c}></lightning-formatted-rich-text>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="description">
+                                                    <h3 class="description-titre">{product.Name}</h3>
+                                                    <p>{product.Summary__c}</p>
+                                                    <button class="btn" onclick={handleClick}>Commander &#8594;</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </article>
-
-                                <article class="produit" data-id-product="2">
-                                    <div class="card">
-                                        <div class="image">
-                                            <a href="page commande">
-                                                <img src="" alt="Carte Repas"/>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="description">
-                                                <h2 class="description-titre">Chèque Habillement</h2>
-                                                <p>Le Chèque Habillement de TALEXO, solution sur mesure pour le financement des vêtements de travail conformément au code du travail.</p>
-
-                                                <!-- bouton -->
-                                                <button class="button-17" onclick={handleClick}>Commander</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article class="produit" data-id-product="3">
-                                    <div class="card">
-                                        <div class="image">
-                                            <a href="page commande">
-                                                <img src="" alt="Carte Repas"/>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="description">
-                                                <h2 class="description-titre">Chèque Cadeau</h2>
-                                                <p>Le Chèque Cadeau TALEXO idéal pour motiver et récompenser vos collaborateurs et relations d’affaires.</p>
-
-                                                <!-- bouton -->
-                                                <button class="button-17" onclick={handleClick}>Commander</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                <article class="produit" data-id-product="4">
-                                    <div class="card">
-                                        <div class="image">
-                                            <a href="page commande">
-                                                <img src="" alt="Carte Repas"/>
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="description">
-                                                <h2 class="description-titre">Carte Multiservices</h2>
-                                                <p>La Carte Multiservices de TALEXO offre une solution complète et novatrice regroupant divers services pour répondre aux besoins des entreprises et de leurs salariés.</p>
-
-                                                <!-- bouton -->
-                                                <button class="button-17" onclick={handleClick}>Commander</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-
-                                
+                                </template>                                
                             </div>
                         </section>
                     </section>
