@@ -21,7 +21,16 @@
             
                 <!-- Partie Vos Informations -->
                 <h2 class="nomSection">Vos informations</h2>
-                <div class="formulaire">             
+                <div class="formulaire"> 
+                    <div class="champ">
+                        <select class="entree" id="salutation" name="salutation">
+                            <option value="" disabled selected hidden>Salutation</option>
+                            <option value="Mr.">Monsieur</option>
+                            <option value="Ms.">Madame</option>
+                        </select>
+                        <span class="fin"></span>
+                    </div>  
+
                     <div class="champ">
                         <input class="entree" placeholder="Nom"  id="last_name" name="last_name" type="text" required></input>
                         <span class="fin"></span>
@@ -37,13 +46,13 @@
                         <span class="fin"></span>
                     </div>
                     <div class="champ">
-                        <input class="entree" placeholder="Numéro de téléphone" id="phone" name="phone" type="text"></input>
+                        <input class="entree" placeholder="Numéro de téléphone" id="phone" name="phone" type="text" required></input>
                         <span class="fin"></span>
                     </div>
                 </div>    
                 <div class="formulaire">
                     <div class="champ">
-                        <input class="entree" placeholder="Votre titre" id="title" name="title" type="text" required></input>
+                        <input class="entree" placeholder="Votre titre" id="title" name="title" type="text"></input>
                         <span class="fin"></span>
                     </div>                      
                 </div>                

@@ -1,7 +1,7 @@
 import { LightningElement } from 'lwc';
 import { NavigationMixin } from "lightning/navigation";
 
-export default class BoutonEnTete extends NavigationMixin(LightningElement) {
+export default class BoutonAPropos extends NavigationMixin(LightningElement) {
     handleClick(){
         const pageReference = {
             type: 'standard__webPage',
@@ -11,4 +11,5 @@ export default class BoutonEnTete extends NavigationMixin(LightningElement) {
         };
         this[NavigationMixin.Navigate](pageReference);
     }
+
 }

@@ -1,0 +1,85 @@
+<template>
+    <div class="corps1">
+        <div>
+            <img src={appResources.ProductImage} alt="Product Images" onerror={handleImageError} class="product-image"/>
+        </div>
+        <br/>
+        <div class="corps2">
+                <div>
+                <h2 class="nomSection">Vouchers Form</h2>
+
+                <!--<div class="formulaire">
+                    <div class="label">
+                        <label for="voucherType">Voucher Type</label>
+                    </div>            
+                    <div class="champ">
+                        <select class="entree" placeholder="Voucher Type"  id="voucherType" name="voucherType">
+                            <option value="meal">Meal Vouchers</option>
+                            <option value="gift">Gift Vouchers</option>
+                            <option value="clothing">Clothing Vouchers</option>
+                        </select>
+                        <span class="fin"></span>
+                    </div>        
+                </div>-->
+
+                <div class="formulaire">
+                    <div class="label">
+                        <label for="voucherValue">Voucher Value (TND)</label>
+                    </div>    
+                    <div class="champ">
+                        <input class="entree" placeholder="Voucher Value (TND)" id="voucherValue" onchange={HandelvoucherValueChange} value={voucherValue} name="voucherValue" type="number" required></input>
+                        <span class="fin"></span>
+                    </div>                      
+                </div>  
+
+                <div class="formulaire">
+                    <div class="label">
+                        <label for="NumberOfVouchersPerBooklet">Number of vouchers per booklet</label>
+                    </div>    
+                    <div class="champ">
+                        <input class="entree" placeholder="Number of vouchers per booklet" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
+                        <span class="fin"></span>
+                    </div>
+                </div>    
+
+                <div class="formulaire">
+                    <div class="label">
+                        <label for="Quantity">Quantity</label>
+                    </div>    
+                    <div class="champ">
+                        <input class="entree" placeholder="Quantity" id="Quantity" onchange={HandelQuantityChange} value={Quantity} name="Quantity" type="number" required></input>
+                        <span class="fin"></span>
+                    </div>
+                </div>    
+
+                <div class="formulaire">
+                    <div class="label">
+                        <label for="NameontheVoucher">Name on the Voucher</label>
+                    </div>    
+                    <div class="champ">
+                        <input class="entree" placeholder="Name on the Voucher" id="NameontheVoucher" onchange={HandelNameontheVoucherChange} name="NameontheVoucher" type="text"></input>
+                        <span class="fin"></span>
+                    </div>
+                </div>
+
+                <div class="formulaire">
+                    <div class="label">
+                        <label>Total Price</label>
+                    </div>    
+                    <div class="champ">
+                        <h2>{returnTotalPrice} TND</h2>                    
+                        <span class="fin"></span>
+                    </div>
+                </div>
+
+                <div class="bas">
+                    <button class="bouton" if:false={isAddedToCart} type="submit" name="submit" onclick={handleAddToCart}>ADD</button>               
+                    <button class="bouton" if:true={isAddedToCart} type="submit" name="submit" onclick={handleRemoveFromCart}>Remove</button>                            
+             
+                </div>
+
+                </div>  
+                                                          
+        </div>
+    </div>
+</template>

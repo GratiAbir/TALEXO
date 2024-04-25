@@ -1,0 +1,227 @@
+section{
+    display: block;
+}
+
+div{
+    display: block;
+    unicode-bidi: isolate;
+}
+
+article{
+    display: block;
+}
+
+a{
+    background-color: transparent;
+    text-decoration: none;
+}
+
+img{
+    vertical-align: middle;
+    border-style: none;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    cursor: pointer;
+    width: auto;
+    display: block;
+    text-align: center;
+    margin: 0px auto;
+    height: 100%;
+    padding: 50px 15px;
+    max-width: 100%;
+    max-height: 220px;
+    opacity: 1 ;
+    transition: opacity 500ms;
+}
+
+.l-wrapper{
+    padding: 0px;
+    margin: 0px;
+    overflow-x: hidden;
+    width:100%;
+    padding-left:15px;
+    padding-right:15px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-12{
+    flex: 0 0 100%;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.page-home>* {
+    margin-bottom: 2rem;
+}
+
+.text--center{
+    text-align: center;
+}
+
+.section1{
+    padding: 2rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 10px;   
+}
+
+.welcome{
+    text-align: center;
+    font-family: Baskerville;
+    font-style: italic;
+    font-weight: 700;
+    background: linear-gradient(to right, #022E51, #022E51);
+    font-size: 2rem;
+    background-image: linear-gradient(to right, #022E51, #022E51);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.produits{
+    align-items: stretch;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.produit {
+    margin-bottom: 1rem;
+    flex: 0 0 calc(33.33% - 30px); /* Un tiers de la largeur - la marge */
+    max-width: calc(33.33% - 30px); /* Un tiers de la largeur - la marge */
+    position: relative;
+    width: 100%;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-color: #a3b4c8;
+    border-style: solid;
+}
+
+
+.card{
+    border-radius:0;
+    border: 0;
+    height: 100%;
+    position: relative;
+    font-weight: 700;
+    text-align: center;
+    color: rgb(34,28,70);
+    overflow: hidden;
+    font-family: Roboto;
+    font-size:14px;
+    min-width: 100px;
+    clip-path: polygon(100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 0);
+    position: relative;
+}
+
+.image{
+    flex-shrink: 0;
+    width: 100%;
+    border-radius: 0 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    background: rgba(163, 180, 200, 0.3);
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.card-body{
+    font-size: 14px;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.description{
+    color : #221C46;
+    font-size: 14px;
+    min-height: 250px;
+    display: flex;
+    flex-direction :  column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.description-titre{
+    font-family: Baskerville;
+    font-size: 18px;
+    font-weight: 400;
+    color: #495057;
+    text-decoration: none;
+    text-align: center;
+    margin-bottom: .5rem;
+    margin-top: 0;
+}
+
+.button-17 {
+    align-items: center;
+    background-color: white;
+    border-style: solid;
+    border-color: #022E51;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #022E51;
+    font-family: Baskerville;
+    font-size: 15px;
+    font-weight: 500;
+    height: 48px;
+    justify-content: center;
+    letter-spacing: .25px;
+    line-height: normal;
+    max-width: 50%;
+    padding: 2px 24px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .button-17:hover {
+    background: rgba(163, 180, 200, 0.5);
+  }
+  
+  .button-17:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+  }
+  
+  .button-17:focus {
+    outline: none;
+    border: 2px solid #B74803;
+  }
+
+@media (min-width: 1200px){
+    .featured-products {
+        max-width: 1140px;
+        margin: auto;
+        padding: 0 ;
+    }
+}
+
+
+
+@media (min-width:576px){
+
+    .produit{
+        margin-bottom: 1rem;
+        flex: 0 0 100%;
+        max-width: 100%%;
+    }
+}

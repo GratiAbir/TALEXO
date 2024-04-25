@@ -1,0 +1,15 @@
+<template>
+    <lightning-card class="titre" title="Mes Achats">
+        <!--<lightning-button slot="actions" label="Filter" title="Filter" icon-name="action:filter" class="slds-m-left_x-small" onclick={handleOpenFilter}></lightning-button>-->
+        
+        <a href="javascript:void(0)" slot="actions" onclick={handleOpenCart} class="slds-m-left_x-small">
+            <div class="cart-icon-container">
+                <lightning-icon icon-name="utility:cart" alternative-text="webcart" title="webcart"></lightning-icon>
+                <lightning-badge label={totalInCart} class="badge"></lightning-badge>
+            </div>
+        </a>
+    </lightning-card><br/>
+    <!--<c-product-filters></c-product-filters>-->
+    <!--<c-product-search></c-product-search>-->
+    <c-cart-data></c-cart-data>
+</template>

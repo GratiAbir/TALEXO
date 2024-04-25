@@ -4,7 +4,8 @@
             <template for:each={products} for:item="product">
                 <div key={product.Id} class="content">
                     <div class="image">
-                        <img src={product.Product_Image__c} alt={product.Name} />
+                        <lightning-formatted-rich-text value={product.Product_Image__c}></lightning-formatted-rich-text>
+                        <!--<img src={product.Product_Image__c} alt={product.Name} />-->
                     </div>
                     <div class="text-box">
                         <h3>{product.Product_Slogan__c}</h3>

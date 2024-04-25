@@ -1,21 +1,55 @@
-.titre{
-    text-align: center;
+.container{
+    display: flex;
+    align-items: center; /* Centre les éléments verticalement */
+    margin: 0 auto; /* Centre le conteneur horizontalement */
+}
+
+.text {
+    flex: 1; /* Pour que le texte prenne autant de place que possible */
+    padding: 40px 80px; /* Ajustement du padding */
+    color: #555;
+}
+
+.text h1 {
+    font-size: 34px;
     font-family: Baskerville;
     font-weight: bold;
-    font-style: italic;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.text span {
     background: linear-gradient(to right, #B74803, #CC6D3D);
-    font-size: 40px;
     background-image: linear-gradient(to right,  #B74803, #CC6D3D);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
 }
 
-.paragraphe{
-    text-align: center;
+.text p {
     font-family: Roboto;
-    font-weight:400;
-    color: black;
-    font-size: 15px;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.btn{
+	display: inline-block;
+	padding: 15px 30px;
+	background : #B74803;
+	border-radius: 20px;
+	color: #fff;
+	margin-top : 20px;
+	transition: 0.5s;
+    border: none;
+}
+.btn:hover{
+	letter-spacing: 3px;
+}
+
+.IMG{
+    margin-right: 30px;
+}
+
+.IMG img {
+    width: 600px;
+    height: auto; /* Garde les proportions de l'image */
+    display: block; /* Empêche l'image de s'étirer */
 }

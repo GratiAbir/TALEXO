@@ -100,10 +100,8 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     }
 
     handleDeleteRow(recordIdToDelete) {
-        // Afficher une boîte de dialogue de confirmation personnalisée
-        const confirmation = window.confirm('Are you sure you want to delete this lead?');
-
-        if (confirmation) {
+        // Display confirmation dialog
+        if (confirm('Are you sure you want to delete this lead?')) {
             deleteRecord(recordIdToDelete)
                 .then(result => {
                     this.showToast('Success', 'Record deleted successfully', 'success', 'dismissable');
@@ -113,6 +111,7 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
                 });
         }
     }
+
  
     updateContactHandler(event){
         this.visibleDatas=[...event.detail.records];
