@@ -3,16 +3,59 @@
         <section aria-modal="true" class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container custom-modal-width">
 				<header class="slds-modal__header">
-					<h2 class="slds-text-heading_small">Votre commande sur mesure</h2>
+                    <h2 class="titre">{productName}</h2>
 					<lightning-icon class="slds-modal__close" icon-name="utility:close" size="small"
 						onclick={closeModal}></lightning-icon>
 				</header>
                 <div class="slds-modal__content modalBodySpinner">
                     <div class="slds-p-around_small">
-                        <h3 class="titre">{productName}</h3>
 
                         <!--Vouchers Form-->
+
+                        
                         <template if:true={showVoucherForm}>
+                        
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="voucherValue">Valeur de chèque (TND) :</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Valeur de chèque (TND)" id="voucherValue" onchange={HandelvoucherValueChange} value={voucherValue} name="voucherValue" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>                      
+                            </div>  
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="NumberOfVouchersPerBooklet">Nombre de chèque par carnet :</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Nombre de chèque par carnet" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>
+                            </div>    
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label for="Quantity">Quantité :</label>
+                                </div>    
+                                <div class="champ">
+                                    <input class="entree" placeholder="Quantité" id="Quantity" onchange={HandelQuantityChange} value={Quantity} name="Quantity" type="number" required></input>
+                                    <span class="fin"></span>
+                                </div>
+                            </div>    
+            
+                            <div class="formulaire">
+                                <div class="label">
+                                    <label>Prix Total</label>
+                                </div>    
+                                <div class="champ">
+                                    <h2>{returnTotalPrice} TND</h2>                    
+                                    <span class="fin"></span>
+                                </div>
+                            </div>
+                        
+                        <!--
                             <div class="row">
                                 <div class="image">
                                     <lightning-formatted-rich-text value={productImage}></lightning-formatted-rich-text>
@@ -70,58 +113,10 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!--
-                            <div class="formulaire">
-                                <div class="label">
-                                    <label for="voucherValue">Voucher Value (TND)</label>
-                                </div>    
-                                <div class="champ">
-                                    <input class="entree" placeholder="Voucher Value (TND)" id="voucherValue" onchange={HandelvoucherValueChange} value={voucherValue} name="voucherValue" type="number" required></input>
-                                    <span class="fin"></span>
-                                </div>                      
-                            </div>  
-            
-                            <div class="formulaire">
-                                <div class="label">
-                                    <label for="NumberOfVouchersPerBooklet">Number of vouchers per booklet</label>
-                                </div>    
-                                <div class="champ">
-                                    <input class="entree" placeholder="Number of vouchers per booklet" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
-                                    <span class="fin"></span>
-                                </div>
-                            </div>    
-            
-                            <div class="formulaire">
-                                <div class="label">
-                                    <label for="Quantity">Quantity</label>
-                                </div>    
-                                <div class="champ">
-                                    <input class="entree" placeholder="Quantity" id="Quantity" onchange={HandelQuantityChange} value={Quantity} name="Quantity" type="number" required></input>
-                                    <span class="fin"></span>
-                                </div>
-                            </div>    
-            
-                            <div class="formulaire">
-                                <div class="label">
-                                    <label for="NameontheVoucher">Name on the Voucher</label>
-                                </div>    
-                                <div class="champ">
-                                    <input class="entree" placeholder="Name on the Voucher" id="NameontheVoucher" onchange={HandelNameontheVoucherChange} name="NameontheVoucher" type="text"></input>
-                                    <span class="fin"></span>
-                                </div>
-                            </div>
-            
-                            <div class="formulaire">
-                                <div class="label">
-                                    <label>Total Price</label>
-                                </div>    
-                                <div class="champ">
-                                    <h2>{returnTotalPrice} TND</h2>                    
-                                    <span class="fin"></span>
-                                </div>
-                            </div>
-                            -->
+                            
+                            
+                        -->
+                            
                         </template>
 
 
@@ -129,17 +124,17 @@
                         <template if:true={showCreditCardForm}>
                             <div class="formulaire">
                                 <div class="champ">
-                                    <input class="entree" placeholder="Recharge Value (TND)" id="recharcheValue" name="recharcheValue" type="number" required></input>
+                                    <input class="entree" placeholder="VALEUR DE LA RECHARGE : (TND)" id="recharcheValue" name="recharcheValue" type="number" required></input>
                                     <span class="fin"></span>
                                 </div>
                             </div>   
                             
                             <div class="form-field">
-                                <button class="bouton" onclick={addInput}>add a new recipient</button>
+                                <button class="bouton" onclick={addInput}>Ajouter nouveaux bénéficiaires</button>
                                 <template for:each={additionalInputs} for:item="input">
                                     <div class="formulaire" key={input.key}>
                                         <div class="champ">
-                                            <input class="entree" placeholder="Full Name"  id={input.key} name="fullName" type="text" required></input>
+                                            <input class="entree" placeholder="Nom et Prénom"  id={input.key} name="fullName" type="text" required></input>
                                             <span class="fin"></span>
                                         </div>
                                         <div class="champ">

@@ -9,9 +9,13 @@
                                 <template for:each={products} for:item="product">
                                     <div class="produit" key={product.Id}>
                                         <div class="card">
+
+                                            
                                             <div class="image">
                                                 <lightning-formatted-rich-text value={product.Icon__c}></lightning-formatted-rich-text>
                                             </div>
+                                            
+                                            
                                             <div class="card-body">
                                                 <div class="description">
                                                     <h3 class="description-titre">{product.Name}</h3>

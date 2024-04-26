@@ -3,9 +3,9 @@
     font-family: Baskerville;
     font-weight: bold;
     font-style: italic;
-    background: linear-gradient(to right, #022E51, #022E51);
+    background: linear-gradient(to right, #B74803, #CC6D3D);
     font-size: 40px;
-    background-image: linear-gradient(to right, #022E51, #022E51);
+    background-image: linear-gradient(to right,  #B74803, #CC6D3D);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

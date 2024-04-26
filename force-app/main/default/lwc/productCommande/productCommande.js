@@ -1,27 +1,40 @@
 import {LightningElement, api, wire, track} from "lwc";
-// messageChannels
-import { publish, MessageContext } from "lightning/messageService";
+import { publish, MessageContext } from "lightning/messageService"; // messageChannels
 import CART_CHANNEL from "@salesforce/messageChannel/productAddRemoveCartChannel__c";
-import talexoResources from '@salesforce/resourceUrl/logo';
 
 export default class ProductCommande extends LightningElement {
 	@track showModal = false;
 
-	@api openModal(products) {
+	@api openModal(productId, productName, productFamily, productImage) {
         this.showModal = true;
+        this.productId = productId;
+        this.productName = productName; 
+        this.productFamily = productFamily;
+        this.productImage = productImage;
     }
 
-
-    get appResources() {
-        return {
-            ProductImage: `${talexoResources}/talexo_black.png`,
-        };
+	get showVoucherForm() {
+        return this.productFamily === 'Vouchers';
     }
 
-    handleImageError(event) {
-        // Set the default image URL when the specified image cannot be loaded
-        event.target.src = `${talexoResources}/talexo_black.png`; // Adjust the default image path as necessary
+    get showCreditCardForm() {
+        return this.productFamily === 'Credit_Cards';
+    } 
+
+	closeModal(){
+        this.showModal = false;
     }
+
+    @api
+	get addedToCart() {
+		return this.isAddedToCart;
+	}
+	set addedToCart(value) {
+		this.isAddedToCart = value;
+	}
+
+	isAddedToCart; 
+
 
     @api product;
     
@@ -38,23 +51,13 @@ export default class ProductCommande extends LightningElement {
 		publish(this.messageContext, CART_CHANNEL, message);
 	}
     
-	@api
-	get addedToCart() {
-		return this.isAddedToCart;
-	}
-	set addedToCart(value) {
-		this.isAddedToCart = value;
-	}
-
-	isAddedToCart;
-    
 	handleAddToCart() {
 		this.isAddedToCart = true;
 		let cartData = {
-			productId: this.product.Id,
-			Id : this.product.Id,
+            productId: this.productId,
+			Id : this.productId,
 			quantity: this.Quantity,
-			Name : this.product.Name,
+			Name : this.productName,
 			price : this.voucherValue,
 			totalPrice : this.totalPrice,
 		}
@@ -64,7 +67,7 @@ export default class ProductCommande extends LightningElement {
 	handleRemoveFromCart() {
 		this.isAddedToCart = false;
 		let cartData = {
-			productId: this.product.Id,
+			productId: this.productId,
 		}
 		this.publishChange(cartData, 'Remove');
 		
@@ -110,20 +113,6 @@ export default class ProductCommande extends LightningElement {
 
 	set defaultQuantity(value) {
 		this.Quantity = value;
-	}
-
-    NameontheVoucher;
-    HandelNameontheVoucherChange(event){
-        this.NameontheVoucher = event.target.value;
-    }
-
-    @api
-	get defaultNameontheVoucher() {
-		return this.NameontheVoucher;
-	}
-
-	set defaultNameontheVoucher(value) {
-		this.NameontheVoucher = value;
 	}
 
     totalPrice;
