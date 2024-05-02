@@ -1,0 +1,21 @@
+<template>
+    <c-click-commander></c-click-commander>
+        <div class="card">                                            
+            <div class="image">
+                <lightning-formatted-rich-text value={product.Icon__c}></lightning-formatted-rich-text>
+            </div>                      
+                                            
+            <div class="card-body">
+                <div class="description">
+                    <h3 class="description-titre">{product.Name}</h3>
+                    <p>{product.Summary__c}</p>
+                    <a href="javascript:void(0)" slot="actions" 
+                    data-productid={product.Id} 
+                    data-productname={product.Name} 
+                    data-productfamily={product.Family} 
+                    data-productimage={product.Product_Image__c}
+                    onclick={handleOpenCommande} class="btn">Commander &#8594;</a>
+                </div>
+            </div>
+        </div>
+</template>

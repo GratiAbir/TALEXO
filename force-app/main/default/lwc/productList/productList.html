@@ -1,18 +1,23 @@
 <template>
-    <section>
-        <div class="container">
-            <template for:each={products} for:item="product">
-                <div key={product.Id} class="content">
-                    <div class="image">
-                        <lightning-formatted-rich-text value={product.Product_Image__c}></lightning-formatted-rich-text>
-                        <!--<img src={product.Product_Image__c} alt={product.Name} />-->
-                    </div>
-                    <div class="text-box">
-                        <h3>{product.Product_Slogan__c}</h3>
-                        <p>{product.Description}</p>
-                    </div>
+    <main>
+        <template for:each={products} for:item="product">
+            <div key={product.Id} class="productItem">
+
+                <picture class="product__img">
+                    <lightning-formatted-rich-text value={product.Product_Image__c}></lightning-formatted-rich-text>
+                </picture>
+            
+                <div class="product__content">
+                    <p class="product__category">{product.Name}</p>
+            
+                    <h1 class="product__title">{product.Product_Slogan__c}</h1>
+            
+                    <p>{product.Description}</p>
+
+                    <button class="button" onclick={handleClick}>Ça m'intéresse, je commande !</button>
                 </div>
-            </template>
-        </div>
-    </section>
+            </div>
+        </template>
+      </main>
+   
 </template>

@@ -1,19 +1,19 @@
 import { LightningElement, track, wire } from 'lwc';
-import getLead from '@salesforce/apex/LeadController.getLead';
-import { NavigationMixin } from 'lightning/navigation';
-import { deleteRecord } from 'lightning/uiRecordApi';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import { refreshApex } from '@salesforce/apex';
-import ACCOUNT_OBJECT from "@salesforce/schema/Account";
-
+import getOpportunityWithContactInfo from '@salesforce/apex/OpportunityController.getOpportunityWithContactInfo';
 
 const columns = [
-    { label: 'Name', fieldName: 'Name' },
-    { label: 'Title', fieldName: 'Title' },
-    { label: 'Company', fieldName: 'Company' },
-    { label: 'Phone', fieldName: 'Phone' },
-    { label: 'Email', fieldName: 'Email' },
-    { label: 'Lead Status', fieldName: 'Status' },
+    /*
+    { label: 'Opportunity Name', fieldName: 'Name' },
+    { label: 'Account Name', fieldName: 'Account.Name' },
+    { label: 'Contact Name', fieldName: 'ContractId' },
+    { label: 'Contact Phone', fieldName: 'ContractId' },
+    { label: 'Stage', fieldName: 'StageName' },
+    */
+    { label: 'Opportunity Name', fieldName: 'OpportunityName' },
+    { label: 'Account Name', fieldName: 'AccountName' },
+    { label: 'Contact Name', fieldName: 'ContactName' },
+    { label: 'Contact Phone', fieldName: 'ContactPhone' },
+    { label: 'Stage', fieldName: 'StageName' },
 
     {
         type: "button", label: 'Actions', initialWidth: 100, typeAttributes: {
@@ -53,7 +53,7 @@ const columns = [
     }
 ];
 
-export default class LeadsList extends NavigationMixin(LightningElement) {
+export default class OpportunitiesList extends NavigationMixin(LightningElement) {
     @track data;
     @track wireResult;
     @track error;
@@ -61,8 +61,8 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     visibleDatas;
     @track searchKey = '';
 
-    @wire(getLead)
-    wiredLeads(result) {
+    @wire(getOpportunityWithContactInfo)
+    wiredOpportunities(result) {
         this.wireResult = result;
         if (result.data) {
             this.data = result.data;
@@ -89,7 +89,7 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
             type: 'standard__recordPage',
             attributes: {
                 recordId: recordId,
-                objectApiName: 'Lead',
+                objectApiName: 'Opportunity',
                 actionName: mode
             }
         })
@@ -97,7 +97,7 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
 
     handleDeleteRow(recordIdToDelete) {
         // Display confirmation dialog
-        if (confirm('Are you sure you want to delete this lead?')) {
+        if (confirm('Are you sure you want to delete this opportunity?')) {
             deleteRecord(recordIdToDelete)
                 .then(result => {
                     this.showToast('Success', 'Record deleted successfully', 'success', 'dismissable');
@@ -108,19 +108,18 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         }
     }
 
- 
     updateContactHandler(event){
         this.visibleDatas=[...event.detail.records];
         console.log(event.detail.records);
     }
 
-    //New
-    handleCreateRecord() {
+     //New
+     handleCreateRecord() {
         // Navigate to the record creation page for the desired object
         this[NavigationMixin.Navigate]({
             type: 'standard__objectPage',
             attributes: {
-                objectApiName: 'Lead',
+                objectApiName: 'Opportunity',
                 actionName: 'new'
             }
         });
@@ -134,25 +133,25 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     }
     filterData() {
         if (this.data) {
-            this.visibleDatas = this.data.filter(lead =>
-                lead.Name.toLowerCase().includes(this.searchKey.toLowerCase())
+            this.visibleDatas = this.data.filter(opportunity =>
+                opportunity.Name.toLowerCase().includes(this.searchKey.toLowerCase())
             );
         }
     }
 
     /* handleDownloadCSV() est une méthode appelée pour télécharger les données de la liste au format CSV. */
     handleDownloadCSV() {
-        const csvData = this.data.map(lead => ({
-            'Lead Name': lead.Name,
-            'Phone': lead.Phone,
-            'Email': lead.Email
+        const csvData = this.data.map(opportunity => ({
+            'Opportunity Name': opportunity.Name,
+            'Account Name': opportunity.AccountId,
+            'Stage': opportunity.StageName
         }));
  
-        exportCSV(this.columns, csvData, 'LeadList');
+        exportCSV(this.columns, csvData, 'OpportunitiesList');
     }
 
-    /* downloadCSV() est une méthode asynchrone utilisée pour générer et télécharger le fichier CSV. */
-    async downloadCSV() {
+     /* downloadCSV() est une méthode asynchrone utilisée pour générer et télécharger le fichier CSV. */
+     async downloadCSV() {
         const data = this.data;
         if (!data || data.length === 0) {
             this.showToast('Error', 'No data to download', 'error');
@@ -160,19 +159,18 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         }
     
         const csvContent = this.convertArrayOfObjectsToCSV(data);
-        this.downloadCSVFile(csvContent, 'LeadsList.csv');
+        this.downloadCSVFile(csvContent, 'OpportunitiesList.csv');
     }
-    
 
-    /* convertArrayOfObjectsToCSV(data) convertit les données des prospects en une chaîne CSV. */
-    convertArrayOfObjectsToCSV(data) {
+     /* convertArrayOfObjectsToCSV(data) convertit les données des prospects en une chaîne CSV. */
+     convertArrayOfObjectsToCSV(data) {
         const csvHeader = Object.keys(data[0]).join(',');
         const csvRows = data.map(row => Object.values(row).join(','));
         return csvHeader + '\n' + csvRows.join('\n');
     }
 
-    /* downloadCSVFile(csvContent, fileName) télécharge le fichier CSV généré en utilisant l'élément <a> caché. */
-    downloadCSVFile(csvContent, fileName) {
+     /* downloadCSVFile(csvContent, fileName) télécharge le fichier CSV généré en utilisant l'élément <a> caché. */
+     downloadCSVFile(csvContent, fileName) {
         const hiddenElement = document.createElement('a');
         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
         hiddenElement.setAttribute('download', fileName); // Use setAttribute to set the download attribute
@@ -180,17 +178,6 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         document.body.appendChild(hiddenElement);
         hiddenElement.click();
         document.body.removeChild(hiddenElement);
-    }
-
-    /* Dashboard redirection */
-    handleClickDashboard(){
-        this[NavigationMixin.Navigate]({
-            type: 'standard__webPage',
-            attributes: {
-                url: 'https://talan104-dev-ed.develop.lightning.force.com/lightning/r/Dashboard/01ZWU000000IQg52AG/view?queryScope=userFolders'
-            }
-        });
- 
     }
 
     showToast(title, message, variant, mode) {
@@ -202,5 +189,5 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         });
         this.dispatchEvent(evt);
     }
-
+ 
 }

@@ -25,8 +25,8 @@ export default class CardContainer extends LightningElement {
         { 
             id: '3', 
             imageSrc: Carte, 
-            cardText: "Carte Talexo 3 en 1", 
-            soustext: "Tous vos avantages réunis sur une seule carte ! Profitez de la commodité ultime avec notre carte Talexo tout-en-un, offrant un accès facile à tous vos avantages en un seul endroit." 
+            cardText: "Carte TALEXO 3 en 1", 
+            soustext: "Tous vos avantages réunis sur une seule carte ! Profitez de la commodité ultime avec notre carte TALEXO tout-en-un, offrant un accès facile à tous vos avantages en un seul endroit." 
         },
         
         { 

@@ -1,73 +1,79 @@
+// Importez les classes nécessaires
 import { LightningElement, track, api } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 import createOrder from '@salesforce/apex/ProductService.createOrder';
-import {ShowToastEvent} from 'lightning/platformShowToastEvent';
+
 
 export default class CartData extends NavigationMixin(LightningElement) {
+    // Déclarez les variables de suivi
     @track showModal = false;
     @track showLoading = false;
     @track products;
     @track totalPrice = 0;
 
-  
+    // Ouvrir le modal avec les produits passés en paramètre
     @api openModal(products) {
-        console.log(products);
+        console.log("productsCartData : ",products);
         this.totalPrice = 0;
         products.forEach(currentItem => {
-            this.totalPrice = this.totalPrice + currentItem.totalPrice;
+            this.totalPrice += currentItem.totalPrice;
         });
-
         this.products = products;
-        this.showModal = true;
+        this.showModal = true;        
     }
 
+    // Fermer le modal
     closeModal(){
         this.showModal = false;
     }
 
+    // Vérifier si le bouton "Create Order" doit être désactivé
     get isDisable(){
         return !(this.products.length > 0) || this.showLoading;
     }
 
+    // Gérer la création de la commande
     handleOrder(){
         this.showLoading = true;
- 
-        createOrder({data:this.products})
-        .then(result=>{
-            let title = 'Order Created Successfully!!';
-            this.showToast('Success!', title, 'success', 'dismissable');
+        createOrder({ data:this.products})
+        .then(result => {
+            let title = 'Ordre créé avec succès!!';
+            this.showToast('Succès!', title, 'success', 'dismissable');
             this.navigateToOrderPage(result);
-        }).catch(err=>{
-            
+        }).catch(err => {
             this.showToast('Error!!', err.body.message, 'error', 'dismissable');
         }).finally(() => {
             this.showLoading = false;
-        })
+        });
     }
 
+    // Naviguer vers la page de commande
     navigateToOrderPage(recordId) {
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
                 recordId: recordId,
-                objectApiName: 'Order__c',
+                objectApiName: 'Order',
                 actionName: 'view'
             },
         });
     }
-  
+
+    // Afficher ou masquer le spinner
     showHideSpinner() {
-        // Setting boolean variable show/hide spinner
         this.showLoading = !this.showLoading;
     }
 
-    showToast(title, message, variant, mode){
+    // Afficher un toast
+    showToast(title, message, variant, mode) {
         const evt = new ShowToastEvent({
             title: title,
-            message:message,
+            message: message,
             variant: variant,
             mode: mode
         });
         this.dispatchEvent(evt);
     } 
+
 }

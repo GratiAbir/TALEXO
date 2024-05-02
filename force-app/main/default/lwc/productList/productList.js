@@ -1,7 +1,8 @@
 import { LightningElement, wire } from 'lwc';
 import getProducts from '@salesforce/apex/productController.getProducts';
+import { NavigationMixin } from "lightning/navigation";
 
-export default class ProductList extends LightningElement {
+export default class ProductList extends NavigationMixin(LightningElement) {
     products;
 
     @wire(getProducts)
@@ -12,5 +13,15 @@ export default class ProductList extends LightningElement {
         } else if (error) {
             console.error(error);
         }
+    }
+
+    handleClick(){
+        const pageReference = {
+            type: 'standard__webPage',
+            attributes: {
+                url: '/information-page'
+            }
+        };
+        this[NavigationMixin.Navigate](pageReference);
     }
 }

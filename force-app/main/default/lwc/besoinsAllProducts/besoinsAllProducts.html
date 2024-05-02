@@ -7,7 +7,9 @@
                         <section class="featured-products">
                             <div class="produits">
                                 <template for:each={products} for:item="product">
-                                    <div class="produit" key={product.Id}>
+                                    <c-besoins-product-tile class="produit" key={product.Id} product={product}></c-besoins-product-tile> 
+                                    <!--<div class="produit" key={product.Id}>
+                                        <c-order-modal></c-order-modal>
                                         <div class="card">
 
                                             
@@ -19,7 +21,7 @@
                                             <div class="card-body">
                                                 <div class="description">
                                                     <h3 class="description-titre">{product.Name}</h3>
-                                                    <p>{product.Summary__c}</p>
+                                                    <p>{product.summary__c}</p>
                                                     <a href="javascript:void(0)" slot="actions" 
                                                         data-productid={product.Id} 
                                                         data-productname={product.Name} 
@@ -29,7 +31,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </template>                                
                             </div>
                         </section>
@@ -38,6 +40,6 @@
             </div>
         </div>
     </section>
-    <c-click-commander></c-click-commander>
+    
     
 </template>

@@ -8,7 +8,7 @@ import {
 import CART_CHANNEL from "@salesforce/messageChannel/productAddRemoveCartChannel__c";
 
 export default class CartHeader extends LightningElement {
-    @track totalInCart = 0;
+	@track totalInCart = 0;
     @track cartData = [];
     
 
@@ -33,22 +33,23 @@ export default class CartHeader extends LightningElement {
 			(message) => {
 				console.log("message " + JSON.stringify(message));
 				let cartData = message.cartData;
-                let cartAction = message.action.cartAction;
-                
-                if(cartAction =='Add'){
-                    this.cartData.push(cartData);
+				let cartAction = message.action.cartAction;
+	
+				if(cartAction =='Add'){
+					this.cartData.push(cartData);
                     this.totalInCart++;
-                } else if(cartAction =='Remove'){
+				} else if(cartAction =='Remove'){
                     let productId = cartData.productId;
                     let cartFilterData = this.cartData.filter(ele => ele.productId != productId);
                     this.cartData = cartFilterData;
                     this.totalInCart--;
                 }
-
-                console.log(this.cartData);
+				console.log("Cart Data :", this.cartData);
 			}
 		);
+		
 	}
+	
 
 	unsubscribeMC() {
 		unsubscribe(this.subscription);
@@ -60,8 +61,6 @@ export default class CartHeader extends LightningElement {
 		child.openModal(this.cartData);
 	}
 
-	handleOpenFilter(){
-		let child = this.template.querySelector('c-product-filters');
-		child.openModal(this.cartData);
-	}
+
+	
 }

@@ -83,9 +83,10 @@
 
 
 
-/* 
+/*
 .row{
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
@@ -95,8 +96,10 @@
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     position: relative;
-    width: 427px;
+    top: 10px;
+    width: 350px;
     height: auto;
+    rotate: -45deg;
 }
 
 .formulaire{
@@ -197,4 +200,4 @@
     font-size: 31px;
     color: #B74803;
 }
-*/
+ */
