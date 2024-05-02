@@ -1,20 +1,20 @@
 import { LightningElement, track, wire } from 'lwc';
+import getOpportunity from '@salesforce/apex/OpportunityController.getOpportunity';
+import { NavigationMixin } from 'lightning/navigation';
 import getOpportunityWithContactInfo from '@salesforce/apex/OpportunityController.getOpportunityWithContactInfo';
 
 const columns = [
-    /*
+    
     { label: 'Opportunity Name', fieldName: 'Name' },
     { label: 'Account Name', fieldName: 'Account.Name' },
-    { label: 'Contact Name', fieldName: 'ContractId' },
-    { label: 'Contact Phone', fieldName: 'ContractId' },
     { label: 'Stage', fieldName: 'StageName' },
-    */
+    /*
     { label: 'Opportunity Name', fieldName: 'OpportunityName' },
     { label: 'Account Name', fieldName: 'AccountName' },
     { label: 'Contact Name', fieldName: 'ContactName' },
     { label: 'Contact Phone', fieldName: 'ContactPhone' },
     { label: 'Stage', fieldName: 'StageName' },
-
+    */
     {
         type: "button", label: 'Actions', initialWidth: 100, typeAttributes: {
             label: 'View',
@@ -61,11 +61,12 @@ export default class OpportunitiesList extends NavigationMixin(LightningElement)
     visibleDatas;
     @track searchKey = '';
 
-    @wire(getOpportunityWithContactInfo)
+    @wire(getOpportunity)
     wiredOpportunities(result) {
         this.wireResult = result;
         if (result.data) {
             this.data = result.data;
+            console.log(this.data);
             this.filterData(); // Call filter method after data is loaded
         } else if (result.error) {
             this.error = result.error;

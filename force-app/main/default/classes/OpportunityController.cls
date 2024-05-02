@@ -2,7 +2,19 @@ public with sharing class OpportunityController {
     public OpportunityController() {
 
     }
-
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Opportunity> getOpportunity(){ 
+        try {
+            System.debug('aaaa');
+            return [SELECT id, Name, Account.Name, StageName    
+                    FROM Opportunity
+                    ORDER BY id DESC];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+ 
     @AuraEnabled(cacheable=true)
     public static List<Map<String, Object>> getOpportunityWithContactInfo(){
         try {
@@ -51,17 +63,4 @@ public with sharing class OpportunityController {
         return contactInfo;
     }
     
-    /*
-    @AuraEnabled(cacheable=true)
-    public static List<Opportunity> getOpportunity(){
-        try {
-            return [SELECT id, Name, Account.Name, StageName    
-                    FROM Opportunity
-                    ORDER BY id DESC];
-           
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-    */
 }
