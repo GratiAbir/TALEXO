@@ -1,4 +1,9 @@
 public with sharing class ProductService {
+
+    public class Beneficiary {
+		public String fullName;
+		public String cin;
+	}
  
     public class ProductOrderWrapper {
         @AuraEnabled
@@ -31,24 +36,25 @@ public with sharing class ProductService {
         public Integer recharcheValue;
  
         @AuraEnabled
-        public List<String> beneficiaries;
+        public List<Beneficiary> beneficiaries;
  
     }
 
     
-    /*
-    public static Id getAccountId(){
+    
+
+    public static Id getAccountIdByName(String name){
+		Account acc = [SELECT Id,Name FROM Account WHERE Name = :name];
+		return acc.Id;
+	}
+
+	public static Id getAccountId(){
 		User user = [SELECT AccountId FROM User WHERE Id = :UserInfo.getUserId()];
 		return user.AccountId;
 	}
-    */
 
-    public static Id getAccountId(String name){
-		return [select id FROM Account WHERE Name = :name];
-	}
- 
-    public static Product2 getProduct2(String name){
-		return [select id,Name from Product2 WHERE Name = 'etudiano'];
+	public static Product2 getProduct2(String name){
+		return [select id,Name,Family from Product2 WHERE Name = :name];
 	}
 
  
@@ -58,11 +64,12 @@ public with sharing class ProductService {
        
         Order ord = new Order();
         ord.EffectiveDate = System.today();
-        ord.AccountId = ProductService.getAccountId();
+        //ord.AccountId = ProductService.getAccountId();
+        ord.AccountId = ProductService.getAccountIdByName('etudiano');
         ord.Status = 'Draft';
         insert ord;
        
-       
+        Decimal totalAmount = 0;
        
         List<OrderProducts__c> ordPros = new List<OrderProducts__c>();
  
@@ -72,13 +79,28 @@ public with sharing class ProductService {
  
             OrderProducts__c ordPro = new OrderProducts__c();
             ordPro.OrderId__c = ord.Id;
-            ordPro.ProductId__c = pro.Id;
+            ordPro.Product__c = pro.Id;
             ordPro.Unit_Price__c = product.price;
             ordPro.Quantity__c = product.quantity;
             ordPro.Total_Price__c = product.totalPrice;
+
+            //System.debug('aaaaa  '+product.beneficiaries.toString());
+
+			if (pro.Family == 'Credit_Cards') {
+				ordPro.recharcheValue__c = product.recharcheValue;
+				ordPro.beneficiaries__c = product.beneficiaries.toString();
+			}else {
+				ordPro.voucherValue__c = product.voucherValue;
+				ordPro.numberOfVouchersPerBooklet__c = product.numberOfVouchersPerBooklet;
+			}
+
             ordPros.add(ordPro);
+            totalAmount += product.totalPrice;	
         }
- 
+        System.debug('traah ayy');
+
+        ord.Amount__c = totalAmount;
+		update ord;
         insert ordPros;
        
         return ord.Id;

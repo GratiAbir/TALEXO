@@ -53,14 +53,21 @@ public with sharing class OpportunityController {
     private static Map<String, Object> getContactInfo(Id accountId) {
         Map<String, Object> contactInfo = new Map<String, Object>();
 
-        // Remplacez la logique suivante par votre propre logique pour récupérer les informations du contact
         Contact contact = [SELECT Id, Name, Phone FROM Contact WHERE AccountId = :accountId LIMIT 1];
 
-        // Stocker les informations du contact dans une carte
-        contactInfo.put('ContactName', contact.Name);
-        contactInfo.put('ContactPhone', contact.Phone);
+        // Vérifier si un contact a été trouvé
+        if (contact != null) {
+            // Stocker les informations du contact dans une carte
+            contactInfo.put('ContactName', contact.Name);
+            contactInfo.put('ContactPhone', contact.Phone);
+        } else {
+            // Si aucun contact n'est trouvé, définir des valeurs par défaut ou laisser les valeurs vides
+            contactInfo.put('ContactName', ''); 
+            contactInfo.put('ContactPhone', ''); 
+        }
 
         return contactInfo;
     }
+
     
 }

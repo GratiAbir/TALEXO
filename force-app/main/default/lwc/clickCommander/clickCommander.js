@@ -71,7 +71,7 @@ export default class ClickCommander extends LightningElement {
 
 	handleAddCardToCart(){
 		this.isAddedToCart = true;
-		beneficiariesData = [];
+		/*beneficiariesData = [];
 
 		// Parcourir la liste des bénéficiaires et ajouter chaque bénéficiaire à la liste
 		for (let beneficiary of this.beneficiaries) {
@@ -80,16 +80,17 @@ export default class ClickCommander extends LightningElement {
 				cin: beneficiary.cin
 			});
 		}
+		*/
 
-		 // Créer l'objet cartData avec les informations des bénéficiaires
-		 let cartData = {
+		let cartData = {
 			productId: this.productId,
 			id : this.productId,
 			name : this.productName,
 			quantity : this.inputCounter,
 			price : this.recharcheValue,
-			totalPrice : this.totalPriceCards,			
-			beneficiaries: this.beneficiariesData,
+			totalPrice : this.totalPriceCards,
+			voucherValue : this.recharcheValue,			
+			beneficiaries: this.additionalInputs,
 		};
 
 		// Publier le changement
@@ -174,18 +175,51 @@ export default class ClickCommander extends LightningElement {
 		this.recharcheValue = value;
 	}
 
-	/* 
+	//******************************************************** */
 	@track additionalInputs = [];
 	inputCounter = 0;
+
 	addInput() {
         this.inputCounter++;
         const newInput = {
-            key: `input${this.inputCounter}`
+            key: `input${this.inputCounter}`,
+			fullName: '',
+			cin: ''
         };
         this.additionalInputs = [...this.additionalInputs, newInput];
     }
-	*/
 
+	HandelFullNameChange(event) {
+        // Get the key of the input that triggered the event
+        const key = event.target.id;
+		
+        // Get the value of the full name input
+        const fullName = event.target.value;
+
+        // Find the input in the additionalInputs array and update its fullName property
+        const inputIndex = this.additionalInputs.findIndex(input => event.target.id.startsWith(input.key));
+
+        if (inputIndex !== -1) {
+            this.additionalInputs[inputIndex].fullName = fullName;
+        }
+    }
+
+	HandelCINChange(event) {
+        // Get the key of the input that triggered the event
+        const key = event.target.id;
+
+        // Get the value of the CIN input
+        const cin = event.target.value;
+
+        // Find the input in the additionalInputs array and update its cin property
+        const inputIndex = this.additionalInputs.findIndex(input => event.target.id.startsWith(input.key));
+
+        if (inputIndex !== -1) {
+            this.additionalInputs[inputIndex].cin = cin;
+        }
+    }
+	
+	/*
 	@track beneficiaries = [];
 	inputCounter = 0;
 	addInput() {
@@ -209,13 +243,12 @@ export default class ClickCommander extends LightningElement {
 		// Affiche les données des bénéficiaires dans la console
 		console.log("Données des bénéficiaires après modification :", this.beneficiaries);
 	}
-		
+	*/	
 
 	//******************************************************** */
-	totalPriceCards; // Initialize totalPriceCards
+	totalPriceCards; 
 	get returnTotalPriceCards() {
-		//this.totalPriceCards = this.recharcheValue * this.additionalInputs.length;
-		this.totalPriceCards = this.recharcheValue * this.beneficiaries.length;
+		this.totalPriceCards = this.recharcheValue * this.additionalInputs.length;
 		return this.totalPriceCards;
 	}
 

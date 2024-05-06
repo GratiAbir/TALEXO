@@ -2,19 +2,22 @@ import { LightningElement, track, wire } from 'lwc';
 import getOpportunity from '@salesforce/apex/OpportunityController.getOpportunity';
 import { NavigationMixin } from 'lightning/navigation';
 import getOpportunityWithContactInfo from '@salesforce/apex/OpportunityController.getOpportunityWithContactInfo';
+import { deleteRecord } from 'lightning/uiRecordApi';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 const columns = [
-    
+    /*
     { label: 'Opportunity Name', fieldName: 'Name' },
     { label: 'Account Name', fieldName: 'Account.Name' },
     { label: 'Stage', fieldName: 'StageName' },
-    /*
+    */
     { label: 'Opportunity Name', fieldName: 'OpportunityName' },
     { label: 'Account Name', fieldName: 'AccountName' },
     { label: 'Contact Name', fieldName: 'ContactName' },
     { label: 'Contact Phone', fieldName: 'ContactPhone' },
     { label: 'Stage', fieldName: 'StageName' },
-    */
+    
     {
         type: "button", label: 'Actions', initialWidth: 100, typeAttributes: {
             label: 'View',
@@ -61,7 +64,7 @@ export default class OpportunitiesList extends NavigationMixin(LightningElement)
     visibleDatas;
     @track searchKey = '';
 
-    @wire(getOpportunity)
+    @wire(getOpportunityWithContactInfo)
     wiredOpportunities(result) {
         this.wireResult = result;
         if (result.data) {
@@ -135,8 +138,8 @@ export default class OpportunitiesList extends NavigationMixin(LightningElement)
     filterData() {
         if (this.data) {
             this.visibleDatas = this.data.filter(opportunity =>
-                opportunity.Name.toLowerCase().includes(this.searchKey.toLowerCase())
-            );
+                opportunity.Name?.toLowerCase().includes(this.searchKey.toLowerCase())
+            );            
         }
     }
 
