@@ -53,6 +53,18 @@ public with sharing class ProductService {
 		return user.AccountId;
 	}
 
+    public static Id getOppIdByName(String name){ 
+        Opportunity opp = [SELECT Id,Name FROM Opportunity WHERE Name = :name];
+        return opp.Id; 
+    }
+
+    public static Opportunity getOppByName(String name){
+ 
+        Opportunity opp = [SELECT Id,Name FROM Opportunity WHERE Name = :name];
+        return opp;
+ 
+    }
+
 	public static Product2 getProduct2(String name){
 		return [select id,Name,Family from Product2 WHERE Name = :name];
 	}
@@ -60,15 +72,25 @@ public with sharing class ProductService {
  
     @AuraEnabled
     public static String createOrder(object data){
+
         List<ProductOrderWrapper> productData = (List<ProductOrderWrapper>) JSON.deserialize(JSON.serialize(data), List<ProductOrderWrapper>.class);
-       
+        
+        // Retrieve the Opportunity
+        Opportunity opp = ProductService.getOppByName('etudiano-');
+        System.debug('Opportunity: ' + opp);
+
+        // Create the Order
         Order ord = new Order();
         ord.EffectiveDate = System.today();
         //ord.AccountId = ProductService.getAccountId();
-        ord.AccountId = ProductService.getAccountIdByName('etudiano');
+        ord.AccountId = ProductService.getAccountIdByName('etudiano'); 
+        ord.OpportunityId = opp.Id;
+        //ord.OpportunityId = ProductService.getOppIdByName('etudiano-');       
         ord.Status = 'Draft';
         insert ord;
        
+        
+        // Calculate total amount
         Decimal totalAmount = 0;
        
         List<OrderProducts__c> ordPros = new List<OrderProducts__c>();
@@ -80,6 +102,7 @@ public with sharing class ProductService {
             OrderProducts__c ordPro = new OrderProducts__c();
             ordPro.OrderId__c = ord.Id;
             ordPro.Product__c = pro.Id;
+            ordPro.Opportunity__c = ProductService.getOppIdByName('etudiano-');
             ordPro.Unit_Price__c = product.price;
             ordPro.Quantity__c = product.quantity;
             ordPro.Total_Price__c = product.totalPrice;
@@ -102,6 +125,10 @@ public with sharing class ProductService {
         ord.Amount__c = totalAmount;
 		update ord;
         insert ordPros;
+
+        opp.Amount = totalAmount;
+        update opp;
+
        
         return ord.Id;
     }
