@@ -54,7 +54,7 @@
     box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
     box-sizing: border-box;
     color: #fff;
-    font-family: Montserrat;
+    font-family: Baskerville;
     font-size: 15px;
     font-weight: 500;
     height: 48px;
@@ -83,32 +83,41 @@
 
 
 
-/*
+
 .row{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-right: -15px;
     margin-left: -15px;
+    justify-content: center;
+    padding-bottom: 0;
 }
 
 .image{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     position: relative;
-    top: 10px;
-    width: 350px;
+    width: 400px;
     height: auto;
-    rotate: -45deg;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+
+
 }
 
 .formulaire{
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: flex-start;
+}
+
+input{
+    outline: none;
 }
 
 .input-group{
@@ -117,8 +126,8 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    border-collapse: separate;
+    /*justify-content: flex-end;
+    border-collapse: separate;*/
     margin-bottom: 7px;
 }
 
@@ -128,24 +137,21 @@
     max-width: 50%;
     margin-bottom: 0;
     display: inline-block;
+    color: #022E51;
 }
 
 .counter{
     border: 2px solid #022E51;
     background-color: #fff;
     font-family: TTTravels-Bold;
-    border-radius: 0;
-    box-shadow: none;
-    width: 190px;
-    background: #fff;
     border-radius: 50px;
     padding: 3px;
-    display: inline-flex;
+    display: flex;
     width: 225px;
     height: 42px;
     box-shadow: 0 1px 1px 0 rgba(3, 3, 3, .35);
     align-items: center;
-    text-align: center;
+    text-align: left;
     justify-content: space-between;
 }
 
@@ -200,4 +206,115 @@
     font-size: 31px;
     color: #B74803;
 }
- */
+
+.counter-input input[type="number"]::-webkit-outer-spin-button,
+.counter-input input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.counter-input input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.total-price {
+    padding-right: 7.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: right;
+    width: 100%;
+   
+}
+
+.labelP {
+    font-family: Lato;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(to right,#B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.champP h1 {
+    font-family: Lato;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.5rem; 
+    background: linear-gradient(to right,#B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 5px;
+    width: 500px;
+    padding: 20px;
+    /*box-shadow: 0 2px 2px 3px rgba(0,0,0,0.1);*/
+    border: 2px solid #A3B4C8;
+}
+
+.wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #A3B4C8;
+}
+
+.add{
+    text-decoration: none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: #022E51;
+    font-size: 2rem;
+    font-weight: blod;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex{
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.delete{
+    text-decoration: none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: #B74803;
+    font-size: 1.5rem;
+    font-weight: blod;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.inputB{
+    padding: 8px 10px;
+    background: #ddd;
+    border: none;
+    width: 50%;
+    border-radius: 5px;
+}
+
+.inputB:focus{
+    outline: 1px solid #efefef
+}
+

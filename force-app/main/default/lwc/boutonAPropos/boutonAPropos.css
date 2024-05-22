@@ -39,13 +39,13 @@
     color: #F6F9FE;
   }
   
-  .button-17:active {
-    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
-    outline: none;
+  .bouton:active {
+    background: rgba(183, 72, 3,0.85);
+    color: #F6F9FE;
   }
   
   .button-17:focus {
     outline: none;
-    border: 2px solid #B74803;
+    border: 2px solid rgba(183, 72, 3,0.85);
   }
   

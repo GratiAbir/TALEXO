@@ -1,0 +1,97 @@
+
+.corps{
+    display:flex;
+    /*background-color: #f7ece5 ;*/
+    padding-left: 20rem;
+    padding-right: 20rem;
+    padding-top: 2rem;      
+    padding: 1rem;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
+}
+.section{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+    max-width: 80rem;
+    border-radius: 1rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    p > strong {
+        font-weight: 500;
+    }
+    p {
+        font-family: Lato;
+        white-space: pre-wrap;
+        line-height: 1.25;
+        font-size: 14px;
+    }
+   
+}
+
+.welcome{
+    font-family: Baskerville;
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(to right, #B74803, #CC6D3D);
+    font-size: 2rem;
+    background-image: linear-gradient(to right, #B74803, #CC6D3D);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.btn-container {
+    display: flex;
+    justify-content: flex-start; /* Placer les boutons à gauche */
+    margin-top: 20px;
+}
+.btnA {
+    display: block;
+    width: 200px;
+    margin-right: 10px; /* Ajouter une marge à droite pour espacer les boutons */
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #022E51;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    border-color: #022E51;
+    cursor: pointer;
+}
+.btnA:last-child {
+    margin-right: 0; 
+}
+.btnA:hover {
+    background-color: rgba(2, 46, 81,0.85);
+}
+
+.btnR {
+    display: block;
+    width: 200px;
+    margin-right: 10px; /* Ajouter une marge à droite pour espacer les boutons */
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #B74803;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    border-color: #B74803;
+    cursor: pointer;
+}
+.btnR:last-child {
+    margin-right: 0; /* Supprimer la marge à droite pour le dernier bouton */
+}
+.btnR:hover {
+    background-color: rgba(183, 72, 3,0.85);
+}
+
+/* CSS pour les icônes */
+.btnA lightning-icon,
+.btnR lightning-icon {
+    --sds-c-icon-brand-size: 0.5rem; /* Taille de l'icône */
+    color: #fff; /* Couleur de l'icône */
+}

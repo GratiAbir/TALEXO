@@ -31,7 +31,7 @@
         font-weight: 500;
     }
     p {
-        font-family: Roboto;
+        font-family: Lato;
         white-space: pre-wrap;
         line-height: 1.25;
         font-size: 12px;
@@ -76,7 +76,7 @@
 
 .entree,
 .entreeLongLabel{
-    font-family: Roboto;
+    font-family: Lato;
     background-color: #ecf0f4;
     height: 3rem;
     width: 100%;
@@ -103,7 +103,7 @@
 .paragraph {
     font-size: 0.6rem; 
     color: #6b7280; 
-    font-family: Roboto;
+    font-family: Lato;
 }
 
 .bouton {
@@ -131,8 +131,8 @@
   }
   
   .bouton:active {
-    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
-    outline: none;
+    background: #B74803;
+    color: #fff;
   }
   
   .bouton:focus {

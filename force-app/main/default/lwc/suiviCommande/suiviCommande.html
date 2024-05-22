@@ -1,0 +1,39 @@
+<template>
+    <p class="greeting"><strong>Bienvenue {contactName} !<br/> Vous pouvez suivre en toute sécurité votre commande sur cette page.</strong></p>
+    <br>
+
+    <lightning-progress-indicator current-step={currentStep} style="font-family:Lato; cursor:default" type="path" has-error={hasError} variant="base">
+        <lightning-progress-step label="Attente de Commande" value="1"></lightning-progress-step>
+        <lightning-progress-step label="Devis en Cours" value="2"></lightning-progress-step>
+        <lightning-progress-step label="Décision Concernat le Devis" value="3"></lightning-progress-step>
+        <lightning-progress-step label="Contrat en Cours" value="4"></lightning-progress-step>
+        <lightning-progress-step label="Signature Contrat en Attente" value="5"></lightning-progress-step>
+        <lightning-progress-step label="Finalisation du Processus" value="6"></lightning-progress-step>
+    </lightning-progress-indicator>
+    <br>
+
+    <!-- Contenu spécifique pour chaque étape -->
+    <template if:true={isStepOne}>
+        <c-attente-de-commande></c-attente-de-commande>
+    </template>
+    <template if:true={isStepTwo}>
+        <c-devis-en-cours></c-devis-en-cours>
+    </template>
+    <template if:true={isStepThree}>
+        <c-decision-concernat-le-devis></c-decision-concernat-le-devis>
+    </template>
+    <template if:true={isStepFour}>
+        <c-contrat-en-cours></c-contrat-en-cours>
+    </template>
+    <template if:true={isStepFive}>
+        <c-signature-contrat-en-attente></c-signature-contrat-en-attente>
+    </template>
+    <template if:true={isStepSixOrSeven}>
+        <template if:true={isClosedWon}>
+            <c-succes-confirme></c-succes-confirme>
+        </template>
+        <template if:true={isClosedLost}>
+            <c-cloture-non-realise></c-cloture-non-realise>
+        </template>
+    </template>
+</template>

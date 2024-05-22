@@ -28,7 +28,7 @@
   }
   
   template {
-    font-family: Roboto;
+    font-family: Lato;
     font-weight: 500;
     font-size: 0.875rem;
     color: #555;
@@ -57,6 +57,7 @@
   
   /* button */
   .button {
+    font-family: Baskerville;
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
@@ -66,7 +67,7 @@
     border: 0;
     border-radius: 0.5rem;
     padding: 0.75em 1.5em;
-    background-color: #B74803;;
+    background-color: #B74803;
     color: #F6F9FE;
     font-weight: 700;
     font-size: 0.925rem;

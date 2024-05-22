@@ -1,23 +1,22 @@
 import { LightningElement, track, wire } from 'lwc';
-import getLead from '@salesforce/apex/LeadController.getLead';
+import getLeads from '@salesforce/apex/LeadController.getLeads';
+import searchLead from '@salesforce/apex/LeadController.searchLead';
 import { NavigationMixin } from 'lightning/navigation';
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
-import ACCOUNT_OBJECT from "@salesforce/schema/Account";
 
 
 const columns = [
     { label: 'Name', fieldName: 'Name' },
-    { label: 'Title', fieldName: 'Title' },
     { label: 'Company', fieldName: 'Company' },
     { label: 'Phone', fieldName: 'Phone' },
     { label: 'Email', fieldName: 'Email' },
     { label: 'Lead Status', fieldName: 'Status' },
 
     {
-        type: "button", label: 'Actions', initialWidth: 100, typeAttributes: {
-            label: 'View',
+        type: "button", label: 'Actions', initialWidth: 120, typeAttributes: {
+            label: 'Details',
             name: 'View',
             title: 'View',
             disabled: false,
@@ -28,7 +27,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: '', initialWidth: 100, typeAttributes: {
+        type: "button", label: '', initialWidth: 120, typeAttributes: {
             label: 'Edit',
             name: 'Edit',
             title: 'Edit',
@@ -40,7 +39,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: '', initialWidth: 110, typeAttributes: {
+        type: "button", label: '', initialWidth: 120, typeAttributes: {
             label: 'Delete',
             name: 'Delete',
             title: 'Delete',
@@ -59,14 +58,18 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     @track error;
     columns = columns;
     visibleDatas;
+    allDatas;
     @track searchKey = '';
+    currentPage = 1;
+    recordSize = 7;
+    totalPage = 0;
 
-    @wire(getLead)
+    @wire(getLeads)
     wiredLeads(result) {
         this.wireResult = result;
         if (result.data) {
             this.data = result.data;
-            this.filterData(); // Call filter method after data is loaded
+            //this.filterData(); // Call filter method after data is loaded
         } else if (result.error) {
             this.error = result.error;
         }
@@ -92,15 +95,42 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
                 objectApiName: 'Lead',
                 actionName: mode
             }
-        })
+        });
     }
 
+    //Delete Action
+    /*@track isModalOpen = false;
+
     handleDeleteRow(recordIdToDelete) {
-        // Display confirmation dialog
+        system.debug('aa');
+        this.openModal(recordIdToDelete);
+    }
+    
+
+    handleDelete() {
+        deleteRecord(this.recordIdToDelete)
+            .then(result => {
+                this.showToast('Success', 'Record deleted successfully!', 'success', 'dismissable');
+                this.closeModal();
+                return refreshApex(this.wireResult);
+            }).catch(error => {
+                this.error = error;
+                this.closeModal();
+            });
+    }
+
+    openModal() {
+        this.isModalOpen = true;
+    }
+    
+    closeModal() {
+        this.isModalOpen = false;
+    }*/
+    handleDeleteRow(recordIdToDelete) {
         if (confirm('Are you sure you want to delete this lead?')) {
             deleteRecord(recordIdToDelete)
                 .then(result => {
-                    this.showToast('Success', 'Record deleted successfully', 'success', 'dismissable');
+                    this.showToast('Success', 'Record deleted successfully!', 'success', 'dismissable');
                     return refreshApex(this.wireResult);
                 }).catch(error => {
                     this.error = error;
@@ -114,7 +144,7 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
         console.log(event.detail.records);
     }
 
-    //New
+    //Create new Lead
     handleCreateRecord() {
         // Navigate to the record creation page for the desired object
         this[NavigationMixin.Navigate]({
@@ -127,7 +157,51 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
     }
 
     //Search
+    @wire(searchLead, { searchKey: '$searchKey' })
+    leadsearch(result) {
+        if (result.data) {
+            this.allDatas = result.data;
+            this.totalPage = Math.ceil(this.allDatas.length / this.recordSize);
+            this.updateVisibleData();
+        } else if (result.error) {
+            this.allDatas = [];
+            this.visibleDatas = undefined;
+        }
+    }
+ 
+    updateVisibleData() {
+        const start = (this.currentPage - 1) * this.recordSize;
+        const end = start + this.recordSize;
+        this.visibleDatas = this.allDatas.slice(start, end);
+    }
+ 
+    handlePreviousPage() {
+        if (this.currentPage > 1) {
+            this.currentPage -= 1;
+            this.updateVisibleData();
+        }
+    }
+ 
+    handleNextPage() {
+        if (this.currentPage < this.totalPage) {
+            this.currentPage += 1;
+            this.updateVisibleData();
+        }
+    }
+ 
+    get disablePrevious() {
+        return this.currentPage <= 1;
+    }
+ 
+    get disableNext() {
+        return this.currentPage >= this.totalPage;
+    }
+ 
     handleSearchKeyChange(event) {
+        this.searchKey = event.target.value;
+    }
+
+    /*handleSearchKeyChange(event) {
         this.searchKey = event.target.value;
         // Call a method to filter data based on the search key
         this.filterData();
@@ -138,7 +212,7 @@ export default class LeadsList extends NavigationMixin(LightningElement) {
                 lead.Name.toLowerCase().includes(this.searchKey.toLowerCase())
             );
         }
-    }
+    }*/
 
     /* handleDownloadCSV() est une méthode appelée pour télécharger les données de la liste au format CSV. */
     handleDownloadCSV() {

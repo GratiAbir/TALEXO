@@ -19,7 +19,7 @@ export default class ProductList extends NavigationMixin(LightningElement) {
         const pageReference = {
             type: 'standard__webPage',
             attributes: {
-                url: '/information-page'
+                url: '/passer-commande'
             }
         };
         this[NavigationMixin.Navigate](pageReference);

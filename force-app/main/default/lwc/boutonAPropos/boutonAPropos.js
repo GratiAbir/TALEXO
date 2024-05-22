@@ -6,7 +6,7 @@ export default class BoutonAPropos extends NavigationMixin(LightningElement) {
         const pageReference = {
             type: 'standard__webPage',
             attributes: {
-                url: '/information-page'
+                url: '/passer-commande'
             }
         };
         this[NavigationMixin.Navigate](pageReference);

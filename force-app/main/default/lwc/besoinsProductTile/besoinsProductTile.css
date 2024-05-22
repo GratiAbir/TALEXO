@@ -100,7 +100,7 @@ lightning-formatted-rich-text{
     font-weight: 700;
     text-align: center;
     overflow: hidden;
-    font-family: Roboto;
+    font-family: Lato;
     font-size:14px;
     min-width: 100px;
     clip-path: polygon(100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 0);
@@ -136,7 +136,7 @@ lightning-formatted-rich-text{
 }
 
 .description-titre{
-    font-family: Roboto;
+    font-family: Lato;
     font-size: 20px;
     font-weight: 500;
     color: #221C46;

@@ -167,11 +167,11 @@ export default class ClickCommander extends LightningElement {
     }
 
 	@api
-	get HandleRechargeValueChange() {
+	get defaultrecharcheValue() {
 		return this.recharcheValue;
 	}
 
-	set HandleRechargeValueChange(value) {
+	set defaultrecharcheValue(value) {
 		this.recharcheValue = value;
 	}
 
@@ -187,6 +187,7 @@ export default class ClickCommander extends LightningElement {
 			cin: ''
         };
         this.additionalInputs = [...this.additionalInputs, newInput];
+		console.log('additionalInputs',this.additionalInputs );
     }
 
 	HandelFullNameChange(event) {
@@ -218,6 +219,14 @@ export default class ClickCommander extends LightningElement {
             this.additionalInputs[inputIndex].cin = cin;
         }
     }
+
+	deleteInput(event) {
+		event.preventDefault(); // Prevent the default anchor behavior
+		const key = event.target.getAttribute('data-key');
+		
+		// Filter out the input with the matching key
+		this.additionalInputs = this.additionalInputs.filter(input => input.key !== key);
+	}
 	
 	/*
 	@track beneficiaries = [];
@@ -251,5 +260,44 @@ export default class ClickCommander extends LightningElement {
 		this.totalPriceCards = this.recharcheValue * this.additionalInputs.length;
 		return this.totalPriceCards;
 	}
+/***************************** increase-decrease */
+increaseVoucherValue() {
+    this.voucherValue++;
+}
 
+decreaseVoucherValue() {
+    if (this.voucherValue > 0) {
+        this.voucherValue--;
+    }
+}
+
+increaseNumberOfVouchersPerBooklet() {
+    this.NumberOfVouchersPerBooklet++;
+}
+
+decreaseNumberOfVouchersPerBooklet() {
+    if (this.NumberOfVouchersPerBooklet > 0) {
+        this.NumberOfVouchersPerBooklet--;
+    }
+}
+
+increaseQuantity() {
+    this.Quantity++;
+}
+
+decreaseQuantity() {
+    if (this.Quantity > 0) {
+        this.Quantity--;
+    }
+}
+
+increaseRecharcheValue(){
+	this.recharcheValue++;
+}
+
+decreaseRecharcheValue(){
+	if (this.recharcheValue > 0) {
+        this.recharcheValue--;
+    }
+}
 }

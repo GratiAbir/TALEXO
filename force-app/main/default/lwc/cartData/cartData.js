@@ -14,7 +14,6 @@ export default class CartData extends NavigationMixin(LightningElement) {
 
     // Ouvrir le modal avec les produits passés en paramètre
     @api openModal(products) {
-        console.log("productsCartData : ",products);
         this.totalPrice = 0;
         products.forEach(currentItem => {
             this.totalPrice += currentItem.totalPrice;
@@ -50,6 +49,14 @@ export default class CartData extends NavigationMixin(LightningElement) {
 
     // Naviguer vers la page de commande
     navigateToOrderPage(recordId) {
+        const pageReference = {
+            type: 'standard__webPage',
+            attributes: {
+                url: '/felicitation-passage-commande'
+            }
+        };
+        this[NavigationMixin.Navigate](pageReference);
+        /*
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
             attributes: {
@@ -58,6 +65,7 @@ export default class CartData extends NavigationMixin(LightningElement) {
                 actionName: 'view'
             },
         });
+        */
     }
 
     // Afficher ou masquer le spinner

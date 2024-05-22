@@ -48,22 +48,31 @@ public with sharing class ProductService {
 		return acc.Id;
 	}
 
-	public static Id getAccountId(){
-		User user = [SELECT AccountId FROM User WHERE Id = :UserInfo.getUserId()];
-		return user.AccountId;
-	}
-
     public static Id getOppIdByName(String name){ 
         Opportunity opp = [SELECT Id,Name FROM Opportunity WHERE Name = :name];
         return opp.Id; 
     }
 
-    public static Opportunity getOppByName(String name){
- 
+    public static Opportunity getOppByName(String name){ 
         Opportunity opp = [SELECT Id,Name FROM Opportunity WHERE Name = :name];
         return opp;
  
     }
+
+	public static Id getAccountId(){
+		User user = [SELECT AccountId FROM User WHERE Id = :UserInfo.getUserId()];
+		return user.AccountId;
+	}
+
+    public static Id getOppId(Id a){
+		Opportunity opp = [SELECT Id FROM Opportunity WHERE  AccountId = :a ];
+		return opp.Id;
+	}
+
+	public static Opportunity getOppById(Id a){
+		Opportunity opp = [SELECT Id FROM Opportunity WHERE  AccountId = :a ];
+		return opp;
+	}
 
 	public static Product2 getProduct2(String name){
 		return [select id,Name,Family from Product2 WHERE Name = :name];
@@ -76,15 +85,15 @@ public with sharing class ProductService {
         List<ProductOrderWrapper> productData = (List<ProductOrderWrapper>) JSON.deserialize(JSON.serialize(data), List<ProductOrderWrapper>.class);
         
         // Retrieve the Opportunity
-        Opportunity opp = ProductService.getOppByName('etudiano-');
-        System.debug('Opportunity: ' + opp);
+        //Opportunity opp = ProductService.getOppByName('etudiano-');
+        Opportunity opp = ProductService.getOppById(ProductService.getAccountId());
 
         // Create the Order
         Order ord = new Order();
         ord.EffectiveDate = System.today();
-        //ord.AccountId = ProductService.getAccountId();
-        ord.AccountId = ProductService.getAccountIdByName('etudiano'); 
-        ord.OpportunityId = opp.Id;
+        ord.AccountId = ProductService.getAccountId();
+        //ord.AccountId = ProductService.getAccountIdByName('etudiano'); 
+        ord.OpportunityId = ProductService.getOppId(ProductService.getAccountId());
         //ord.OpportunityId = ProductService.getOppIdByName('etudiano-');       
         ord.Status = 'Draft';
         insert ord;
@@ -102,7 +111,8 @@ public with sharing class ProductService {
             OrderProducts__c ordPro = new OrderProducts__c();
             ordPro.OrderId__c = ord.Id;
             ordPro.Product__c = pro.Id;
-            ordPro.Opportunity__c = ProductService.getOppIdByName('etudiano-');
+            //ordPro.Opportunity__c = ProductService.getOppIdByName('etudiano-');
+            ordPro.Opportunity__c = ProductService.getOppId(ProductService.getAccountId());
             ordPro.Unit_Price__c = product.price;
             ordPro.Quantity__c = product.quantity;
             ordPro.Total_Price__c = product.totalPrice;

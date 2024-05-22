@@ -1,0 +1,13 @@
+@media (min-width: 48em) {
+    .slds-modal__container {
+        margin: 0 auto;
+        width: 70%;
+        max-width: 60rem;
+        min-height: 30rem;
+    }
+}
+@media (min-width: 48em) {
+    .slds-modal__content {
+        min-height: 15rem;
+    }
+}

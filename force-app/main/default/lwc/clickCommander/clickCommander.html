@@ -12,7 +12,7 @@
 
                         <!--Vouchers Form-->                       
                         <template if:true={showVoucherForm}>
-                            <!--
+                            
                             <div class="row">
                                 <div class="image">
                                     <lightning-formatted-rich-text value={productImage}></lightning-formatted-rich-text>
@@ -20,16 +20,16 @@
                                 <div class="formulaire">
                                     <div class="input-group">
                                         <div class="nom">
-                                            <label for="voucherValue">Valeur de chèque (TND)</label>
+                                            <label for="voucherValue">Valeur de chèque (TND):</label>
                                         </div>
                                         <div class="counter">
-                                            <div class="counter-decrease">
+                                            <div class="counter-decrease" onclick={decreaseVoucherValue}>
                                                 <span>-</span>
                                             </div>
                                             <div class="counter-input">
                                                 <input class="counter-value" id="voucherValue" onchange={HandelvoucherValueChange} value={voucherValue} name="voucherValue" type="number" required></input>
                                             </div>
-                                            <div class="counter-increase">
+                                            <div class="counter-increase" onclick={increaseVoucherValue}>
                                                 <span>+</span>
                                             </div>
                                         </div>
@@ -40,13 +40,13 @@
                                             <label for="NumberOfVouchersPerBooklet">Nombre de chèque par carnet :</label>
                                         </div>
                                         <div class="counter">
-                                            <div class="counter-decrease">
+                                            <div class="counter-decrease" onclick={decreaseNumberOfVouchersPerBooklet}>
                                                 <span>-</span>
                                             </div>
                                             <div class="counter-input">
-                                                <input class="counter-value" placeholder="Voucher Value (TND)" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
+                                                <input class="counter-value" id="NumberOfVouchersPerBooklet" onchange={HandelNumberOfVouchersPerBookletChange} value={NumberOfVouchersPerBooklet} name="NumberOfVouchersPerBooklet" type="number" required></input>
                                             </div>
-                                            <div class="counter-increase">
+                                            <div class="counter-increase" onclick={increaseNumberOfVouchersPerBooklet}>
                                                 <span>+</span>
                                             </div>
                                         </div>
@@ -57,21 +57,29 @@
                                             <label for="Quantity">Quantité :</label>
                                         </div>
                                         <div class="counter">
-                                            <div class="counter-decrease">
+                                            <div class="counter-decrease" onclick={decreaseQuantity}>
                                                 <span>-</span>
                                             </div>
                                             <div class="counter-input">
                                                 <input class="counter-value" id="Quantity" onchange={HandelQuantityChange} value={Quantity} name="Quantity" type="number" required></input>
                                             </div>
-                                            <div class="counter-increase">
+                                            <div class="counter-increase" onclick={increaseQuantity}>
                                                 <span>+</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="total-price">
+                                    <div class="labelP">
+                                        <label>Prix Total :   </label>
+                                    </div>    
+                                    <div class="champP">
+                                        <h1>{returnTotalPriceVouchers} TND</h1>
+                                    </div>
+                                </div>
                             </div>
-                            -->
-
+                            
+                            <!--
                             <div class="formulaire">
                                 <div class="label">
                                     <label for="voucherValue">Valeur de chèque (TND) :</label>
@@ -130,63 +138,79 @@
                                     <h2>{returnTotalPriceVouchers} TND</h2>                    
                                     <span class="fin"></span>
                                 </div>
-                            </div>              
+                            </div>
+                            -->              
                         </template>
 
 
                         <!--Credit_Cards Form-->
                         <template if:true={showCreditCardForm}>
-                            <div class="formulaire">
+                            <div class="row">
+                                <div class="image">
+                                    <lightning-formatted-rich-text value={productImage}></lightning-formatted-rich-text>
+                                </div>
+                                <div class="formulaire">
+                                    <div class="input-group">
+                                        <div class="nom">
+                                            <label for="recharcheValue">Valeur de la recharge (TND) :</label>
+                                        </div>
+                                        <div class="counter">
+                                            <div class="counter-decrease" onclick={decreaseRecharcheValue}>
+                                                <span>-</span>
+                                            </div>
+                                            <div class="counter-input">
+                                                <input class="counter-value" id="recharcheValue" onchange={HandleRechargeValueChange} value={recharcheValue} name="recharcheValue" type="number" required></input>
+                                            </div>
+                                            <div class="counter-increase" onclick={increaseRecharcheValue}>
+                                                <span>+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="container">
+                                    <div class="wrap">
+                                        <h2>Ajouter Nouveaux Bénéficiaires</h2>
+                                        <a href="#" onclick={addInput} class="add">&plus;</a>
+                                    </div>
+                                    <div class="inp-group">
+                                        <template for:each={additionalInputs} for:item="input">
+                                            <div class="flex" key={input.key}>
+                                                <input class="inputB" placeholder="Nom Prénom" id={input.key} onchange={HandelFullNameChange} name={input.key} type="text" required></input>
+                                                <input class="inputB" placeholder="CIN" id={input.key} data-index={index} onchange={HandelCINChange} name={input.key} type="number" required></input>
+                                                <a href="#" class="delete" onclick={deleteInput} data-key={input.key}>&times;</a>
+                                            </div>
+                                        </template>                                    
+                                    </div>
+                                </div>
+                                <div class="total-price">
+                                    <div class="labelP">
+                                        <label>Prix Total : </label>
+                                    </div>    
+                                    <div class="champP">
+                                        <h1>{returnTotalPriceCards} TND</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <!-- 
+                            <div class="formulaire">
                                 <div class="label">
-                                    <label for="recharcheValue">Recharge Value: (TND)</label>
+                                    <label for="voucherValue">Recharge Value: (TND)</label>
                                 </div> 
                                 <div class="champ">
-                                    <input class="entree" placeholder="VALEUR DE LA RECHARGE : (TND)" id="recharcheValue" name="recharcheValue" onchange={HandelrecharcheValueChange} value={recharcheValue} type="number" required></input>
+                                    <input class="entree" placeholder="VALEUR DE LA RECHARGE : (TND)" id="recharcheValue" name="recharcheValue" onchange={HandleRechargeValueChange} value={recharcheValue} type="number" required></input>
                                     <span class="fin"></span>
                                 </div>
-                                <!--
-                                <div class="label">
-                                    <label for="recharcheValue">Valeur De La Recharge (TND) : </label>
-                                </div>
-                                <div class="champ">
-                                    <input class="entree" 
-                                        placeholder="Valeur De La Recharge (TND)"
-                                        id="recharcheValue"
-                                        onchange={HandleRechargeValueChange}
-                                        value={recharcheValue}
-                                        name="recharcheValue"
-                                        type="number"
-                                        required/>
-                                    <span class="fin"></span>
-                                </div>
-                                -->
                             </div>   
-                        
-                            <!--
-                                <div class="form-field">
-                                <button class="bouton" onclick={addInput}>Ajouter nouveaux bénéficiaires</button>
-                                <template for:each={additionalInputs} for:item="input">
-                                    <div class="formulaire" key={input.key}>
-                                        <div class="champ">
-                                            <input class="entree" placeholder="Nom Prénom"  id={input.key} name="fullName" type="text" required></input>
-                                            <span class="fin"></span>
-                                        </div>
-                                        <div class="champ">
-                                            <input class="entree" placeholder="CIN" id={input.key} name="cin" type="number" required></input>
-                                            <span class="fin"></span>
-                                        </div>                       
-                                    </div>  
-                                </template>   
-                            </div>
-                            -->
                             
                             <div class="form-field">
-                                <button class="bouton" onclick={addInput}>Ajouter nouveaux bénéficiaires</button>
+                                <button class="bouton" onclick={addInput}>Add new beneficiaries</button>
                                 <template for:each={additionalInputs} for:item="input">
                                     <div class="formulaire" key={input.key}>
                                         <div class="champ">
-                                            <input class="entree" placeholder="Nom Prénom" id={input.key} onchange={HandelFullNameChange} name={input.key} type="text" required></input>
+                                            <input class="entree" placeholder="Full Name" id={input.key} onchange={HandelFullNameChange} name={input.key} type="text" required></input>
                                             <span class="fin"></span>
                                         </div>
                                         <div class="champ">
@@ -197,42 +221,16 @@
                                 </template>
                             </div>
 
-                            <!--
-                            <div class="form-field">
-                                <button class="bouton" onclick={addInput}>Ajouter nouveaux bénéficiaires</button>
-                                <template for:each={beneficiaries} for:item="beneficiary" for:index="index">
-                                    <div class="formulaire" key={beneficiary.key}>
-                                        <div class="champ">
-                                            <input class="entree" placeholder="Nom et Prénom"  id={beneficiary.key} name="fullName" type="text" 
-                                                value={beneficiary.fullName} 
-                                                onchange={handleBeneficiaryChange} 
-                                                data-index={index}
-                                                required></input>
-                                            <span class="fin"></span>
-                                        </div>
-                                        <div class="champ">
-                                            <input class="entree" placeholder="CIN" id={beneficiary.key} name="cin" type="number" 
-                                                value={beneficiary.cin} 
-                                                onchange={handleBeneficiaryChange} 
-                                                data-index={index}
-                                                required></input>
-                                            <span class="fin"></span>
-                                        </div>                       
-                                    </div>  
-                                </template>
-                            </div>
-                            -->
-                        
                             <div class="formulaire">
                                 <div class="label">
-                                    <label>Prix Total</label>
+                                    <label>Total Price</label>
                                 </div>    
                                 <div class="champ">
-                                    <h2>{returnTotalPriceCards} TND</h2>
+                                    <h2>{returnTotalPriceCredit} TND</h2>                    
                                     <span class="fin"></span>
                                 </div>
                             </div>
-
+                            -->
                         </template>
                     </div>
                 </div>

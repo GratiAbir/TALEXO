@@ -7,7 +7,7 @@ public with sharing class OpportunityController {
     public static List<Opportunity> getOpportunity(){ 
         try {
             System.debug('aaaa');
-            return [SELECT id, Name, Account.Name, StageName    
+            return [SELECT id, Name, StageName, Probability    
                     FROM Opportunity
                     ORDER BY id DESC];
         } catch (Exception e) {
@@ -69,5 +69,33 @@ public with sharing class OpportunityController {
         return contactInfo;
     }
 
+    /**Suivi Commande */
+    //Méthode pour récupérer l'ID du compte associé à l'utilisateur connecté
+    public static Id getAccountId(){
+		User user = [SELECT AccountId FROM User WHERE Id = :UserInfo.getUserId()];
+		return user.AccountId;
+	}
+
+    // Méthode pour récupérer le stage de l'opportunité
+    public static Opportunity getOpportunityStage() {
+        Opportunity opp = [SELECT Id, StageName FROM Opportunity WHERE AccountId = :getAccountId()];
+        //Opportunity opp = [SELECT Id, StageName FROM Opportunity WHERE Name = 'etudiano-'];
+        return opp; 
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static Map<String, Object> getOpportunityStatusWithContactInfo(){
+        Map<String, Object> opportunityWithContact = new Map<String, Object>();
+
+        Opportunity opp = getOpportunityStage();
+        Id accountId = getAccountId();
+        Map<String, Object> contactInfo = getContactInfo(accountId);
+        //Map<String, Object> contactInfo = getContactInfo('001WU00000BwCSIYA3');
+
+        opportunityWithContact.put('StageName', opp.StageName);
+        opportunityWithContact.put('ContactName', contactInfo.get('ContactName'));
+
+        return opportunityWithContact; 
+    }
     
 }

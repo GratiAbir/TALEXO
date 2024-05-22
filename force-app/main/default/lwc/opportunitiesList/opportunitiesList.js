@@ -7,20 +7,20 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 
 const columns = [
-    /*
+    
     { label: 'Opportunity Name', fieldName: 'Name' },
-    { label: 'Account Name', fieldName: 'Account.Name' },
     { label: 'Stage', fieldName: 'StageName' },
-    */
+    { label: 'Probability', fieldName: 'Probability' },
+    /*
     { label: 'Opportunity Name', fieldName: 'OpportunityName' },
     { label: 'Account Name', fieldName: 'AccountName' },
     { label: 'Contact Name', fieldName: 'ContactName' },
     { label: 'Contact Phone', fieldName: 'ContactPhone' },
     { label: 'Stage', fieldName: 'StageName' },
-    
+    */
     {
-        type: "button", label: 'Actions', initialWidth: 100, typeAttributes: {
-            label: 'View',
+        type: "button", label: 'Actions', initialWidth: 130, typeAttributes: {
+            label: 'Details',
             name: 'View',
             title: 'View',
             disabled: false,
@@ -31,7 +31,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: '', initialWidth: 100, typeAttributes: {
+        type: "button", label: '', initialWidth: 130, typeAttributes: {
             label: 'Edit',
             name: 'Edit',
             title: 'Edit',
@@ -43,7 +43,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: '', initialWidth: 110, typeAttributes: {
+        type: "button", label: '', initialWidth: 130, typeAttributes: {
             label: 'Delete',
             name: 'Delete',
             title: 'Delete',
@@ -64,7 +64,7 @@ export default class OpportunitiesList extends NavigationMixin(LightningElement)
     visibleDatas;
     @track searchKey = '';
 
-    @wire(getOpportunityWithContactInfo)
+    @wire(getOpportunity)
     wiredOpportunities(result) {
         this.wireResult = result;
         if (result.data) {
