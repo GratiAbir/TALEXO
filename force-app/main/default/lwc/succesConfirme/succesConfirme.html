@@ -6,15 +6,20 @@
             </div>
             <div class="info">
                 <p>
-                   <strong> Félicitations! </strong>
-                   Le contrat est signé, c'est le début d'une super aventure ensemble. 
-                   Nous sommes ravis de travailler avec vous pour concrétiser vos idées et atteindre vos objectifs. 
-                   Notre équipe est prête à commencer dès maintenant pour vous livrer votre commande. 
-                   <strong> Veuillez noter que la livraison de votre commande sera effectuée une fois le paiement reçu. 
-                    Cliquez sur le bouton ci-dessous pour procéder au paiement.</strong>
-                   En outre, nous vous enverrons <strong>un formulaire de satisfaction client à remplir </strong>afin de nous aider à améliorer nos services et à mieux répondre à vos besoins à l'avenir.
+                    <strong> Félicitations! </strong>
+                    Le contrat est signé, c'est le début d'une super aventure ensemble. 
+                    Nous sommes ravis de travailler avec vous pour concrétiser vos idées et atteindre vos objectifs. 
+                    Notre équipe est prête à commencer dès maintenant pour vous livrer votre commande. 
+                    <strong> Veuillez noter que la livraison de votre commande sera effectuée une fois le paiement reçu.</strong>
+                    En outre, nous vous enverrons <strong>un formulaire de satisfaction client à remplir </strong>afin de nous aider à améliorer nos services et à mieux répondre à vos besoins à l'avenir.
                 </p>
-                <button class="btn" onclick={handleOpenPayment}>Payer Maintenant ! &#8594;</button>
+                <template if:true={isPaymentPaid}>
+                    <p class="success-message">Votre paiement a été reçu avec succès. Merci pour votre confiance !</p>
+                </template>
+                <template if:true={isPaymentUnpaid}>
+                    <p><strong>Cliquez sur le bouton ci-dessous pour procéder au paiement.</strong></p>
+                    <button class="btn" onclick={handleOpenPayment}>Payer Maintenant ! &#8594;</button>
+                </template>
             </div>  
         </div>        
     </div>

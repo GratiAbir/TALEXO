@@ -1,40 +1,39 @@
-.background{
-    padding: 0; /* Supprimer le padding */
-    margin: 0; /* Supprimer la marge */
-    min-height: 72vh; /* Ajuster la hauteur à 100% de la vue */
-    overflow-y: hidden;
+.background {
+    padding: 0;
+    margin: 0;
+    min-height: 72vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 
 .corps {
     max-width: 32.5rem;
     margin: auto;
-    transform: translateY(35%);
     position: relative;
+    padding: 1rem;
 }
 
-.corps1 {    
+.corps1 {
     filter: blur(30px);
     padding: 1rem;
     inset: 0;
-    background-image: linear-gradient(90deg, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8 );
+    background-image: linear-gradient(90deg, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8, #A3B4C8);
     height: 40vh;
     position: absolute;
 }
 
-
 .corps2 {
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem;
     background-color: #022E51;
-    border-radius: 1rem;    
-    justify-content: center;
-    align-items: center;   
+    border-radius: 1rem;
     position: relative;
+    z-index: 1;
 }
 
-.titre{
-    margin-bottom: 2rem;
+.titre {
+    margin-bottom: 1.5rem;
     background: linear-gradient(to right, #A3B4C8, #A3B4C8);
     font-size: 2rem;
     line-height: 2.5rem;
@@ -45,38 +44,57 @@
     font-style: italic;
     background-clip: text;
     color: transparent;
-    font-style: normal;
-    width: fit-content;
-    font-weight : 700;
+    font-weight: 700;
 }
 
-.message{
+.message {
     line-height: 1.5;
     white-space: pre-wrap;
     font-family: Roboto;
     color: #fff;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
 
+.btnSuivi {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #B74803;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btnSuivi:hover {
+    background-color: rgba(183, 72, 3, 0.85);
 }
 
 /* Media Query for Mobile */
 @media only screen and (max-width: 767px) {
-    .background{
+    .background {
         max-height: 70vh;
+        padding: 0 1rem;
     }
 
     .corps {
-        max-width: 90%; /* Adjusted width for mobile */
-        transform: translateY(0); /* Reset transform for mobile */
-        
+        max-width: 100%;
+        padding: 0;
     }
 
     .titre {
-        font-size: 1.5rem; /* Adjusted font size for mobile */
-        line-height: 2rem; /* Adjusted line height for mobile */
+        font-size: 1.5rem;
+        line-height: 2rem;
     }
 
-    .message{
-        font-size: 0.8rem;
+    .message {
+        font-size: 0.9rem;
+    }
+
+    .btnSuivi {
+        width: 90%;
+        padding: 10px;
     }
 }

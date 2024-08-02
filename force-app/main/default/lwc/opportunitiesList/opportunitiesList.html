@@ -6,9 +6,9 @@
                     <!--New Button-->
                     <lightning-button label="New" onclick={handleCreateRecord} variant="brand-outline" class="slds-m-left_x-small"></lightning-button>
 
-                    <!-- Dashboard Button
+                    <!-- Dashboard Button--> 
                     <lightning-button variant="brand-outline" label="View Dashboard" title="Primary action with lighter look" onclick={handleClickDashboard} class="slds-m-left_x-small"></lightning-button>
-                     --> 
+                     
                      
                     <!-- Download CSV Button --> 
                     <lightning-button variant="brand" label="Download as CSV" onclick={downloadCSV} title="Download action with brand variant" icon-name="utility:download" class="slds-m-left_x-small"></lightning-button> 
@@ -20,7 +20,7 @@
                 <!--Search -->
                 <div class="slds-col slds-grow">
                     <lightning-input
-                            placeholder="Search by name"
+                            placeholder="Search..."
                             type="search"
                             value={searchKey}
                             onchange={handleSearchKeyChange}

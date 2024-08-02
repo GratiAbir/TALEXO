@@ -1,0 +1,40 @@
+<template>
+    <lightning-card title="Réclamations" icon-name="standard:case">
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col"> 
+                    <!--New Button-->
+                    <lightning-button label="New" onclick={handleCreateRecord} variant="brand-outline" class="slds-m-left_x-small"></lightning-button>
+
+                    <!-- Dashboard Button --> 
+                    <lightning-button variant="brand-outline" label="View Dashboard" title="Primary action with lighter look" onclick={handleClickDashboard} class="slds-m-left_x-small"></lightning-button>  
+                </div>
+                
+                <div class="slds-col"></div>
+               
+            </div>
+        </div>
+        
+        <template if:true={data}>
+            <lightning-datatable key-field="Id" data={visibleDatas} columns={columns} hide-checkbox-column="true"
+                show-row-number-column="true" onrowaction={callRowAction}>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            {error}
+        </template>
+
+        <!--
+        <div slot="footer" class="slds-var-m-vertical_medium" style="padding-left: 515px; width:1000px;">
+            <c-pagination records={data} onupdate={updateContactHandler}></c-pagination>
+        </div>
+        -->
+        <div slot="footer" class="slds-var-m-vertical_medium" style="display: flex; justify-content: center;">
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={handlePreviousPage} disabled={disablePrevious}></lightning-button>
+            <p class="slds-text-align_center" style="padding: 0 15px;"> Page {currentPage} / {totalPage} </p>
+            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={handleNextPage} disabled={disableNext}></lightning-button>
+        </div>
+    </lightning-card>
+    
+</template>

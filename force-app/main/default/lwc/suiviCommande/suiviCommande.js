@@ -47,7 +47,7 @@ export default class SuiviCommande extends LightningElement {
             console.log('opportunityStageName ',opportunityStageName)
 
             const stageToStepMap = {
-                'En Attente de Commande': '1',
+                'Waiting For Order': '1',
                 'Proposal/Price Quote': '2',
                 'Negotiation/Review': '3',
                 'Contract Preparation': '4',

@@ -19,7 +19,7 @@ const columns = [
     { label: 'Stage', fieldName: 'StageName' },
     */
     {
-        type: "button", label: 'Actions', initialWidth: 130, typeAttributes: {
+        type: "button", label: 'Actions', initialWidth: 120, typeAttributes: {
             label: 'Details',
             name: 'View',
             title: 'View',
@@ -31,7 +31,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: '', initialWidth: 130, typeAttributes: {
+        type: "button", label: '', initialWidth: 120, typeAttributes: {
             label: 'Edit',
             name: 'Edit',
             title: 'Edit',
@@ -43,7 +43,7 @@ const columns = [
         }
     },
     {
-        type: "button", label: '', initialWidth: 130, typeAttributes: {
+        type: "button", label: '', initialWidth: 120, typeAttributes: {
             label: 'Delete',
             name: 'Delete',
             title: 'Delete',
@@ -182,6 +182,17 @@ export default class OpportunitiesList extends NavigationMixin(LightningElement)
         document.body.appendChild(hiddenElement);
         hiddenElement.click();
         document.body.removeChild(hiddenElement);
+    }
+
+     /* Dashboard redirection */
+     handleClickDashboard(){
+        this[NavigationMixin.Navigate]({
+            type: 'standard__webPage',
+            attributes: {
+                url: 'https://talan104-dev-ed.develop.lightning.force.com/lightning/r/Dashboard/01ZWU000000SdeL2AS/view?queryScope=userFolders'
+            }
+        });
+ 
     }
 
     showToast(title, message, variant, mode) {

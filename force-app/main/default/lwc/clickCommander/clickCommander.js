@@ -71,16 +71,6 @@ export default class ClickCommander extends LightningElement {
 
 	handleAddCardToCart(){
 		this.isAddedToCart = true;
-		/*beneficiariesData = [];
-
-		// Parcourir la liste des bénéficiaires et ajouter chaque bénéficiaire à la liste
-		for (let beneficiary of this.beneficiaries) {
-			beneficiariesData.push({
-				fullName: beneficiary.fullName,
-				cin: beneficiary.cin
-			});
-		}
-		*/
 
 		let cartData = {
 			productId: this.productId,
@@ -92,6 +82,17 @@ export default class ClickCommander extends LightningElement {
 			voucherValue : this.recharcheValue,			
 			beneficiaries: this.additionalInputs,
 		};
+
+		/*beneficiariesData = [];
+
+		// Parcourir la liste des bénéficiaires et ajouter chaque bénéficiaire à la liste
+		for (let beneficiary of this.beneficiaries) {
+			beneficiariesData.push({
+				fullName: beneficiary.fullName,
+				cin: beneficiary.cin
+			});
+		}
+		*/
 
 		// Publier le changement
 		this.publishChange(cartData, 'Add');
@@ -223,6 +224,7 @@ export default class ClickCommander extends LightningElement {
 	deleteInput(event) {
 		event.preventDefault(); // Prevent the default anchor behavior
 		const key = event.target.getAttribute('data-key');
+		this.inputCounter -=1;
 		
 		// Filter out the input with the matching key
 		this.additionalInputs = this.additionalInputs.filter(input => input.key !== key);

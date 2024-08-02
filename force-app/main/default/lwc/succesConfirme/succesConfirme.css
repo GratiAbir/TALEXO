@@ -58,3 +58,8 @@ template{
 .btn:hover{
 	letter-spacing: 3px;
 }
+.success-message {
+    color: green;
+    font-weight: bold;
+    margin-top: 20px;
+}

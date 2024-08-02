@@ -4,6 +4,15 @@ public with sharing class ProductService {
 		public String fullName;
 		public String cin;
 	}
+
+    public static String formatBeneficiaries(List<Beneficiary> beneficiaries) {
+        List<String> formattedBeneficiaries = new List<String>();
+        for (Beneficiary beneficiary : beneficiaries) {
+            formattedBeneficiaries.add('Full Name: ' + beneficiary.fullName + ', CIN: ' + beneficiary.cin);
+        }
+        return String.join(formattedBeneficiaries, '\n');
+    }
+    
  
     public class ProductOrderWrapper {
         @AuraEnabled
@@ -70,13 +79,35 @@ public with sharing class ProductService {
 	}
 
 	public static Opportunity getOppById(Id a){
-		Opportunity opp = [SELECT Id FROM Opportunity WHERE  AccountId = :a ];
+		Opportunity opp = [SELECT Id, Name, Payment__c FROM Opportunity WHERE  AccountId = :a ];
 		return opp;
 	}
 
 	public static Product2 getProduct2(String name){
 		return [select id,Name,Family from Product2 WHERE Name = :name];
 	}
+
+    public static Contact getContact(Id a){
+		return [SELECT Id, Name, Phone, Email FROM Contact WHERE AccountId = :a LIMIT 1];
+	}
+
+    public class CustomAddress {
+        public String street;
+        public String city;
+        public String state;
+        public String postalCode;
+        public String country;
+    }
+
+    public static String getAddressAccount(Id accountId) {
+        Account acc = [SELECT BillingCity, BillingState, BillingPostalCode, BillingCountry FROM Account WHERE Id = :accountId LIMIT 1];
+        
+        String address;
+        address = acc.BillingCountry + ' ' + acc.BillingCity ;
+        return address;
+    }
+    
+    
 
  
     @AuraEnabled
@@ -121,7 +152,8 @@ public with sharing class ProductService {
 
 			if (pro.Family == 'Credit_Cards') {
 				ordPro.recharcheValue__c = product.recharcheValue;
-				ordPro.beneficiaries__c = product.beneficiaries.toString();
+				//ordPro.beneficiaries__c = product.beneficiaries.toString();
+                ordPro.beneficiaries__c = formatBeneficiaries(product.beneficiaries);
 			}else {
 				ordPro.voucherValue__c = product.voucherValue;
 				ordPro.numberOfVouchersPerBooklet__c = product.numberOfVouchersPerBooklet;
@@ -137,7 +169,25 @@ public with sharing class ProductService {
         insert ordPros;
 
         opp.Amount = totalAmount;
+        opp.Payment__c = 'Unpaid';
         update opp;
+
+
+        
+    //create quote related to the order
+    Quote newQuote = new Quote();
+    Contact contact = ProductService.getContact(ProductService.getAccountId());
+    String addressAccount = getAddressAccount(ProductService.getAccountId());
+    newQuote.Name = opp.Name+'Quote';
+    newQuote.OpportunityId = opp.id;
+    newQuote.Order__c = ord.Id;
+    newQuote.ExpirationDate = System.today()+6;
+    newQuote.ContactId = contact.Id;
+    newQuote.Phone = contact.Phone;
+    newQuote.Email = contact.Email;
+    newQuote.AccountAddress__c = addressAccount;
+
+    insert newQuote;
 
        
         return ord.Id;

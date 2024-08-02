@@ -38,8 +38,24 @@ public with sharing class QuoteService {
         System.debug('AcceptedQuote');
     }
 
+    // @AuraEnabled
+    // public static void RejectedQuote() {
+    //     Id opportunityId = getOpportunityIdByCurrentUser(); 
+
+    //     // Mettre à jour le statut de l'opportunité
+    //     Opportunity oppToUpdate = new Opportunity(Id = opportunityId, StageName = 'Closed Lost');
+    //     update oppToUpdate;
+
+    //     // Mettre à jour le statut du devis
+    //     Id quoteId = getQuoteIdByCurrentUser(); // Méthode fictive pour récupérer l'ID du devis
+    //     Quote quoteToUpdate = new Quote(Id = quoteId, Status = 'Rejected');
+    //     update quoteToUpdate;
+
+    //     System.debug('RejectedQuote');
+    // }
+
     @AuraEnabled
-    public static void RejectedQuote() {
+    public static void RejectedQuote(String reason) {
         Id opportunityId = getOpportunityIdByCurrentUser(); 
 
         // Mettre à jour le statut de l'opportunité
@@ -47,8 +63,8 @@ public with sharing class QuoteService {
         update oppToUpdate;
 
         // Mettre à jour le statut du devis
-        Id quoteId = getQuoteIdByCurrentUser(); // Méthode fictive pour récupérer l'ID du devis
-        Quote quoteToUpdate = new Quote(Id = quoteId, Status = 'Rejected');
+        Id quoteId = getQuoteIdByCurrentUser();
+        Quote quoteToUpdate = new Quote(Id = quoteId, Status = 'Rejected', Description = reason);
         update quoteToUpdate;
 
         System.debug('RejectedQuote');

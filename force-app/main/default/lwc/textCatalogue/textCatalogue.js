@@ -8,7 +8,7 @@ export default class TextCatalogue extends NavigationMixin(LightningElement) {
         const pageReference = {
             type: 'standard__webPage',
             attributes: {
-                url: '/information-page'
+                url: '/passer-commande'
             }
         };
         this[NavigationMixin.Navigate](pageReference);

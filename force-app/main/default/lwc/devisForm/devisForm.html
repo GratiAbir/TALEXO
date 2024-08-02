@@ -10,6 +10,13 @@
                 <button class="btnA" onclick={handleAcceptedQuote}>Accepter le Devis</button>
                 <button class="btnR" onclick={handleRejectedQuote}>Rejeter le Devis</button>
             </div>
+            <template if:true={isRejectionVisible}>
+                <div class="rejection-reason">
+                    <label for="rejectionReason">Raison du refus :</label>
+                    <textarea id="rejectionReason" name="rejectionReason" onchange={handleReasonChange}></textarea>
+                    <button class="btnR" onclick={submitRejection}>Soumettre</button>
+                </div>
+            </template>
         </div>
         </div>
     </div>
